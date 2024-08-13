@@ -1,0 +1,31 @@
+{
+  "name": "@yutu-cli/get-npm-info",
+  "version": "1.0.0",
+  "description": "@yutu-cli get-npm-info",
+  "author": "amberHe <1542588809@qq.com>",
+  "homepage": "https://github.com/19934488173/yutu-cli#readme",
+  "license": "ISC",
+  "main": "dist/get-npm-info.js",
+  "module": "dist/get-npm-info.module.js",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/19934488173/yutu-cli.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@yutu-cli/get-npm-info.test.js"
+  },
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/19934488173/yutu-cli/issues"
+  }
+}

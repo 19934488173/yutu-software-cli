@@ -6,6 +6,9 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
+	"scripts": {
+		"dev": "nodemon --exec node core/cli/bin/index.js"
+	},
 	"devDependencies": {
 		"@eslint/js": "^9.9.0",
 		"eslint": "^9.9.0",
@@ -13,6 +16,7 @@
 		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-prettier": "^5.2.1",
 		"lerna": "^8.1.8",
+		"nodemon": "^3.1.4",
 		"prettier": "^3.3.3"
 	}
 }
