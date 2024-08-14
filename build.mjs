@@ -78,8 +78,8 @@ packages.forEach((pkgPath) => {
 });
 
 // 监听文件变化并触发重新编译
-const watcher = chokidar.watch(
-	packages.map((pkgPath) => path.join(pkgPath, 'src/**/*.{ts,js}'))
-);
+// const watcher = chokidar.watch(
+// 	packages.map((pkgPath) => path.join(pkgPath, 'src/**/*.{ts,js}'))
+// );
 
-watcher.on('change', handleFileChange).on('add', handleFileChange);
+// watcher.on('change', handleFileChange).on('add', handleFileChange);

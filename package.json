@@ -9,7 +9,7 @@
 	"scripts": {
 		"build": "node build.mjs",
 		"build:watch": "node build.mjs --watch",
-		"dev": "nodemon --exec node core/cli/dist/index.js"
+		"dev": "nodemon --watch core/cli/src -e ts --exec \"pnpm run build && node core/cli/dist/index.js\""
 	},
 	"devDependencies": {
 		"@types/node": "^22.2.0",
@@ -25,8 +25,5 @@
 		"nodemon": "^3.1.4",
 		"prettier": "^3.3.3",
 		"typescript": "^5.5.4"
-	},
-	"dependencies": {
-		"path-exists": "^5.0.0"
 	}
 }
