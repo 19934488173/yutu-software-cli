@@ -7,6 +7,6 @@ export default function demo() {
 	shareUtils();
 	console.log(a);
 	console.log('发布脚手架测试版本');
-	return 'Hello from';
+	return 'Hello from cli!';
 }
 demo();
