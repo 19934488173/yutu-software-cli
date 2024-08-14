@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"module": "esnext",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"declarationMap": false,
+		"sourceMap": false,
+		"rootDir": ".",
+		"baseUrl": ".",
+		"paths": {
+			"*": ["*", "*.js"],
+			"@yutu-cli/share-utils": ["utils/share-utils/src/index.ts"]
+		},
+		"outDir": "./dist"
+	},
+	"exclude": ["node_modules"]
+}

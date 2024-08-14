@@ -1,0 +1,85 @@
+import chokidar from 'chokidar';
+import { build } from 'esbuild';
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const packages = [
+	path.join(__dirname, 'core/cli'),
+	path.join(__dirname, 'utils/share-utils')
+];
+
+function hashFile(filePath) {
+	const fileBuffer = fs.readFileSync(filePath);
+	const hashSum = crypto.createHash('sha256');
+	hashSum.update(fileBuffer);
+	return hashSum.digest('hex');
+}
+
+const fileHashes = new Map();
+
+function compilePackage(filePath, pkgPath) {
+	const relativePath = path.relative(path.join(pkgPath, 'src'), filePath);
+	const outPath = path.join(
+		pkgPath,
+		'dist',
+		relativePath.replace(/\.ts$/, '.js')
+	);
+
+	const currentHash = hashFile(filePath);
+	const previousHash = fileHashes.get(filePath);
+
+	if (currentHash !== previousHash) {
+		// 更新文件哈希值
+		fileHashes.set(filePath, currentHash);
+
+		build({
+			entryPoints: [filePath],
+			outfile: outPath,
+			format: 'esm',
+			sourcemap: false,
+			minify: true,
+			platform: 'node',
+			target: 'esnext',
+			bundle: true
+		})
+			.then(() => {
+				console.log(`Built ${filePath} -> ${outPath}`);
+			})
+			.catch(() => process.exit(1));
+	} else {
+		console.log(`Skipped ${filePath}, no changes detected.`);
+	}
+}
+
+function handleFileChange(filePath) {
+	const pkgPath = packages.find((p) => filePath.startsWith(p));
+	if (pkgPath) {
+		compilePackage(filePath, pkgPath);
+	}
+}
+
+// 初始编译：对所有文件进行编译
+packages.forEach((pkgPath) => {
+	const srcPath = path.join(pkgPath, 'src');
+	if (fs.existsSync(srcPath)) {
+		const files = fs.readdirSync(srcPath, { withFileTypes: true });
+		files.forEach((file) => {
+			if (file.isFile() && file.name.endsWith('.ts')) {
+				const filePath = path.join(srcPath, file.name);
+				compilePackage(filePath, pkgPath);
+			}
+		});
+	}
+});
+
+// 监听文件变化并触发重新编译
+const watcher = chokidar.watch(
+	packages.map((pkgPath) => path.join(pkgPath, 'src/**/*.{ts,js}'))
+);
+
+watcher.on('change', handleFileChange).on('add', handleFileChange);
