@@ -1,14 +1,27 @@
 {
-	"name": "@yutu-cli/cli",
-	"version": "1.0.2",
+	"name": "@imooc-cli-dev/core",
+	"version": "1.0.0",
 	"description": "@yutu-cli cli",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-cli#readme",
 	"license": "ISC",
 	"type": "module",
 	"main": "dist/index.js",
+	"bin": {
+		"yutu-cli": "dist/index.js"
+	},
 	"dependencies": {
-		"@yutu-cli/share-utils": "workspace:*"
+		"@yutu-cli/debug-log": "workspace:*",
+		"@yutu-cli/get-npm-info": "workspace:*",
+		"@yutu-cli/share-utils": "workspace:*",
+		"chalk": "^5.3.0",
+		"commander": "^12.1.0",
+		"dotenv": "^16.4.5",
+		"import-local": "^3.2.0",
+		"path-exists": "^5.0.0",
+		"root-check": "^2.0.0",
+		"semver": "^7.6.3",
+		"userhome": "^1.0.0"
 	},
 	"directories": {
 		"lib": "dist",
@@ -31,5 +44,9 @@
 	"exports": {
 		".": "./dist/index.js",
 		"./cli": "./dist/cli.js"
+	},
+	"devDependencies": {
+		"@types/root-check": "^1.0.2",
+		"@types/semver": "^7.5.8"
 	}
 }

@@ -1,14 +1,14 @@
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+// import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import pkg from '@typescript-eslint/eslint-plugin';
 import parser from '@typescript-eslint/parser';
 
 const { configs } = pkg;
 
 export default [
-	eslintPluginPrettierRecommended,
+	// eslintPluginPrettierRecommended,
 	{
-		files: ['core/**/*.ts'],
-		ignores: ['node_modules/**', 'dist/**'],
+		ignores: ['node_modules/**'],
+		files: ['core/**/*.ts', 'utils/**/*.ts'],
 		languageOptions: {
 			ecmaVersion: 'latest',
 			sourceType: 'module',

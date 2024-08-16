@@ -1,16 +1,33 @@
-import chokidar from 'chokidar';
 import { build } from 'esbuild';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
+
+// 需要排除的包，不打包进去，减小体积的同时，也避免打包时出现循环依赖的问题，还能解决nodejs的模块查找问题
+const excludeFiles = [
+	'commander',
+	'import-local',
+	'debug',
+	'root-check',
+	'userhome',
+	'dotenv',
+	'url-join',
+	'semver',
+	'axios',
+	'@yutu-cli/debug-log',
+	'@yutu-cli/get-npm-info'
+];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const packages = [
 	path.join(__dirname, 'core/cli'),
-	path.join(__dirname, 'utils/share-utils')
+	path.join(__dirname, 'utils/share-utils'),
+	path.join(__dirname, 'utils/debug-log'),
+	path.join(__dirname, 'utils/get-npm-info')
 ];
 
 function hashFile(filePath) {
@@ -42,10 +59,12 @@ function compilePackage(filePath, pkgPath) {
 			outfile: outPath,
 			format: 'esm',
 			sourcemap: false,
-			minify: true,
+			minify: false,
 			platform: 'node',
 			target: 'esnext',
-			bundle: true
+			bundle: true,
+			plugins: [nodeExternalsPlugin()],
+			external: excludeFiles
 		})
 			.then(() => {
 				console.log(`Built ${filePath} -> ${outPath}`);
@@ -53,13 +72,6 @@ function compilePackage(filePath, pkgPath) {
 			.catch(() => process.exit(1));
 	} else {
 		console.log(`Skipped ${filePath}, no changes detected.`);
-	}
-}
-
-function handleFileChange(filePath) {
-	const pkgPath = packages.find((p) => filePath.startsWith(p));
-	if (pkgPath) {
-		compilePackage(filePath, pkgPath);
 	}
 }
 
@@ -76,6 +88,13 @@ packages.forEach((pkgPath) => {
 		});
 	}
 });
+
+// function handleFileChange(filePath) {
+// 	const pkgPath = packages.find((p) => filePath.startsWith(p));
+// 	if (pkgPath) {
+// 		compilePackage(filePath, pkgPath);
+// 	}
+// }
 
 // 监听文件变化并触发重新编译
 // const watcher = chokidar.watch(

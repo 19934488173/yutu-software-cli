@@ -1,8 +1,3 @@
-// core/cli/src/cli.ts
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { Command } from "commander";
-
 // node_modules/.pnpm/chalk@5.3.0/node_modules/chalk/source/vendor/ansi-styles/index.js
 var ANSI_BACKGROUND_OFFSET = 10;
 var wrapAnsi16 = (offset = 0) => (code) => `\x1B[${code + offset}m`;
@@ -492,123 +487,27 @@ var chalk = createChalk();
 var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
-// utils/share-utils/src/isObject.ts
-function isObject(value) {
-  return Object.prototype.toString.call(value) === "[object Object]";
-}
-
-// utils/share-utils/src/readPackageJson.ts
-import { readFile } from "fs/promises";
-import { join } from "path";
-async function readPackageJson(path2) {
-  try {
-    const newPath = path2.replace(/\/dist$/, "");
-    const fullPath = join(newPath, "./package.json");
-    const data = await readFile(fullPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading package.json:", error);
-    throw error;
+// utils/debug-log/src/index.ts
+import debug from "debug";
+var createLogger = (namespace) => {
+  if (process.env.DEBUG) {
+    debug.enable(process.env.DEBUG);
   }
-}
-var readPackageJson_default = readPackageJson;
-
-// utils/share-utils/src/index.ts
-var shareUtils = {
-  isObject,
-  readPackageJson: readPackageJson_default
-};
-var src_default = shareUtils;
-
-// core/cli/src/cli.ts
-import createLogger from "@yutu-cli/debug-log";
-
-// core/cli/src/prepare.ts
-import rootCheck from "root-check";
-import userhome from "userhome";
-import path from "path";
-import dotenv from "dotenv";
-import semver from "semver";
-
-// node_modules/.pnpm/path-exists@5.0.0/node_modules/path-exists/index.js
-import fs, { promises as fsPromises } from "node:fs";
-function pathExistsSync(path2) {
-  try {
-    fs.accessSync(path2);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// core/cli/src/prepare.ts
-import getNpmSemverVersion from "@yutu-cli/get-npm-info";
-var DEFAULT_CLI_HOME = ".yutu-cli";
-var checkHomeDir = () => {
-  const homeDir = userhome();
-  if (!homeDir || !pathExistsSync(homeDir)) {
-    throw new Error("\u65E0\u6CD5\u83B7\u53D6\u7528\u6237\u4E3B\u76EE\u5F55");
-  }
-};
-var checkEnv = () => {
-  const homeDir = userhome();
-  const cliConfig = {
-    home: homeDir,
-    cliHome: ""
+  const logger = debug(process.env.DEBUG === namespace ? namespace : "");
+  return {
+    log: (...args) => logger(args),
+    info: (...args) => logger("INFO:", ...args),
+    warn: (...args) => {
+      const coloredArgs = args.map((arg) => source_default.yellow(arg));
+      logger("WARN:", ...coloredArgs);
+    },
+    error: (...args) => {
+      const coloredArgs = args.map((arg) => source_default.red(arg));
+      logger("ERROR:", ...coloredArgs);
+    }
   };
-  const dotenvPath = path.resolve(homeDir, ".env");
-  if (pathExistsSync(dotenvPath)) {
-    dotenv.config({ path: dotenvPath });
-  }
-  cliConfig.cliHome = process.env.CLI_HOME ? path.join(homeDir, process.env.CLI_HOME) : path.join(homeDir, DEFAULT_CLI_HOME);
-  process.env.CLI_HOME_PATH = cliConfig.cliHome;
 };
-var prepare = async () => {
-  rootCheck();
-  checkHomeDir();
-  checkEnv();
-};
-var prepare_default = prepare;
-
-// core/cli/src/cli.ts
-var { readPackageJson: readPackageJson2 } = src_default;
-var program = new Command();
-var pkg;
-async function getPkg() {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  pkg = await readPackageJson2(__dirname);
-}
-var cli = async () => {
-  try {
-    await getPkg();
-    await prepare_default();
-    registerCommand();
-  } catch (error) {
-    console.log(error);
-  }
-};
-function registerCommand() {
-  program.name(Object.keys(pkg.bin)[0]).version(pkg.version).usage("<command> [options]").option("-d, --debug [namespace]", "\u5F00\u542F\u8C03\u8BD5\u6A21\u5F0F", false).option("-tp, --targetPath <targetPath>", "\u6307\u5B9A\u672C\u5730\u8C03\u8BD5\u6587\u4EF6\u76EE\u6807\u8DEF\u5F84", "");
-  program.command("init <projectName>").option("-f, --force", "\u5F3A\u5236\u521D\u59CB\u5316\u9879\u76EE").action(() => {
-  });
-  program.on("option:debug", () => {
-    const debugOption = program.getOptionValue("debug");
-    process.env.DEBUG = debugOption !== true ? debugOption : "*";
-    const logger = createLogger("cli");
-    logger.info("debug\u6A21\u5F0F\u5DF2\u5F00\u542F");
-  });
-  program.on("option:targetPath", () => {
-    const targetPath = program.getOptionValue("targetPath");
-    process.env.CLI_TARGET_PATH = targetPath;
-  });
-  program.on("command:*", (obj) => {
-    console.error(source_default.red("\u672A\u77E5\u7684\u547D\u4EE4: %s"), obj[0]);
-    program.help();
-  });
-  program.parse(process.argv);
-}
-var cli_default = cli;
+var src_default = createLogger;
 export {
-  cli_default as default,
-  pkg
+  src_default as default
 };

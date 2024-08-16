@@ -1,9 +1,10 @@
 {
-	"name": "@yutu-cli/get-npm-info",
+	"name": "@yutu-cli/debug-log",
 	"version": "1.0.0",
-	"description": "@yutu-cli get-npm-info",
+	"description": "@yutu-cli debug-log",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-cli#readme",
+	"type": "module",
 	"license": "ISC",
 	"main": "dist/index.js",
 	"directories": {
@@ -14,26 +15,21 @@
 		"dist"
 	],
 	"publishConfig": {
-		"registry": "https://registry.npmmirror.com"
+		"registry": "https://registry.npmmirror.com/"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/19934488173/yutu-cli.git"
 	},
 	"scripts": {
-		"test": "node ./__tests__/@yutu-cli/get-npm-info.test.js"
+		"test": "node ./__tests__/@yutu-cli/debug-log.test.js"
 	},
-	"type": "module",
 	"bugs": {
 		"url": "https://github.com/19934488173/yutu-cli/issues"
 	},
 	"dependencies": {
-		"axios": "^1.7.4",
-		"semver": "^7.6.3",
-		"url-join": "^5.0.0"
-	},
-	"devDependencies": {
-		"@types/semver": "^7.5.8",
-		"@types/url-join": "^4.0.3"
+		"@types/debug": "^4.1.12",
+		"chalk": "^5.3.0",
+		"debug": "^4.3.6"
 	}
 }

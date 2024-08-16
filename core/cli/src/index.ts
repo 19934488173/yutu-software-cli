@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-import { a } from './cli';
-import shareUtils from '@yutu-cli/share-utils';
+import importLocal from 'import-local';
+import { fileURLToPath } from 'url';
+import cli from './cli';
 
-export default function demo() {
-	shareUtils();
-	console.log(a);
-	console.log('发布脚手架测试版本');
-	return 'Hello from cli!';
+const __filename = fileURLToPath(import.meta.url);
+
+if (importLocal(__filename)) {
+	console.log('Using local version of core-cli');
+} else {
+	cli();
 }
-demo();
