@@ -17,6 +17,7 @@
 			"@yutu-cli/share-utils": ["utils/share-utils/src/index.ts"],
 			"@yutu-cli/debug-log": ["utils/debug-log/src/index.ts"],
 			"@yutu-cli/get-npm-info": ["utils/get-npm-info/src/index.ts"],
+			"@yutu-cli/exec": ["core/exec/src/index.ts"],
 			"userhome": ["core/cli/types/userhome.d.ts"]
 		},
 		"outDir": "./dist"

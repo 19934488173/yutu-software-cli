@@ -4,6 +4,7 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import shareUtils from '@yutu-cli/share-utils';
 import createLogger from '@yutu-cli/debug-log';
+import exec from '@yutu-cli/exec';
 import prepare from './prepare';
 
 const { readPackageJson } = shareUtils;
@@ -43,7 +44,7 @@ function registerCommand() {
 	program
 		.command('init <projectName>')
 		.option('-f, --force', '强制初始化项目')
-		.action(() => {});
+		.action(exec);
 
 	//监听debug参数
 	program.on('option:debug', () => {

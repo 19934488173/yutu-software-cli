@@ -498,36 +498,10 @@ var chalk = createChalk();
 var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
-// utils/share-utils/src/isObject.ts
-function isObject(value) {
-  return Object.prototype.toString.call(value) === "[object Object]";
-}
-
-// utils/share-utils/src/readPackageJson.ts
-import { readFile } from "fs/promises";
-import { join } from "path";
-async function readPackageJson(path2) {
-  try {
-    const newPath = path2.replace(/\/dist$/, "");
-    const fullPath = join(newPath, "./package.json");
-    const data = await readFile(fullPath, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading package.json:", error);
-    throw error;
-  }
-}
-var readPackageJson_default = readPackageJson;
-
-// utils/share-utils/src/index.ts
-var shareUtils = {
-  isObject,
-  readPackageJson: readPackageJson_default
-};
-var src_default = shareUtils;
-
 // core/cli/src/cli.ts
+import shareUtils from "@yutu-cli/share-utils";
 import createLogger from "@yutu-cli/debug-log";
+import exec from "@yutu-cli/exec";
 
 // core/cli/src/prepare.ts
 import rootCheck from "root-check";
@@ -577,12 +551,12 @@ var prepare = async () => {
 var prepare_default = prepare;
 
 // core/cli/src/cli.ts
-var { readPackageJson: readPackageJson2 } = src_default;
+var { readPackageJson } = shareUtils;
 var program = new Command();
 var pkg;
 async function getPkg() {
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  pkg = await readPackageJson2(__dirname);
+  pkg = await readPackageJson(__dirname);
 }
 var cli = async () => {
   try {
@@ -595,8 +569,7 @@ var cli = async () => {
 };
 function registerCommand() {
   program.name(Object.keys(pkg.bin)[0]).version(pkg.version).usage("<command> [options]").option("-d, --debug [namespace]", "\u5F00\u542F\u8C03\u8BD5\u6A21\u5F0F", false).option("-tp, --targetPath <targetPath>", "\u6307\u5B9A\u672C\u5730\u8C03\u8BD5\u6587\u4EF6\u76EE\u6807\u8DEF\u5F84", "");
-  program.command("init <projectName>").option("-f, --force", "\u5F3A\u5236\u521D\u59CB\u5316\u9879\u76EE").action(() => {
-  });
+  program.command("init <projectName>").option("-f, --force", "\u5F3A\u5236\u521D\u59CB\u5316\u9879\u76EE").action(exec);
   program.on("option:debug", () => {
     const debugOption = program.getOptionValue("debug");
     process.env.DEBUG = debugOption !== true ? debugOption : "*";

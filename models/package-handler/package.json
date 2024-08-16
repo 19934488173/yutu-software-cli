@@ -1,17 +1,12 @@
 {
-	"name": "@yutu-cli/exec",
+	"name": "@yutu-cli/package-handler",
 	"version": "1.0.0",
-	"description": "@yutu/cli exec",
+	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-cli#readme",
 	"license": "ISC",
+	"type": "module",
 	"main": "dist/index.js",
-	"dependencies": {
-		"@yutu-cli/debug-log": "workspace:*",
-		"@yutu-cli/package-handler": "workspace:*",
-		"@yutu-cli/share-utils": "workspace:*",
-		"commander": "^12.1.0"
-	},
 	"directories": {
 		"lib": "dist",
 		"test": "__tests__"
@@ -20,17 +15,24 @@
 		"dist"
 	],
 	"publishConfig": {
-		"registry": "https://registry.npmmirror.com"
+		"registry": "https://registry.npmmirror.com/"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/19934488173/yutu-cli.git"
 	},
 	"scripts": {
-		"test": "node ./__tests__/@yutu-cli/exec.test.js"
+		"test": "node ./__tests__/@yutu-cli/package-handler.test.js"
 	},
-	"type": "module",
 	"bugs": {
 		"url": "https://github.com/19934488173/yutu-cli/issues"
+	},
+	"dependencies": {
+		"@yutu-cli/get-npm-info": "workspace:*",
+		"@yutu-cli/share-utils": "workspace:*",
+		"fs-extra": "^11.2.0",
+		"npminstall": "^7.12.0",
+		"path-exists": "^5.0.0",
+		"pkg-dir": "^8.0.0"
 	}
 }

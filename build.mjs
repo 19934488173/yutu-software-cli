@@ -16,8 +16,14 @@ const excludeFiles = [
 	'url-join',
 	'semver',
 	'axios',
+	'npminstall',
+	'pkg-dir',
+	'fs-extra',
 	'@yutu-cli/debug-log',
-	'@yutu-cli/get-npm-info'
+	'@yutu-cli/get-npm-info',
+	'@yutu-cli/exec',
+	'@yutu-cli/package-handler',
+	'@yutu-cli/share-utils'
 ];
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +31,8 @@ const __dirname = path.dirname(__filename);
 
 const packages = [
 	path.join(__dirname, 'core/cli'),
+	path.join(__dirname, 'core/exec'),
+	path.join(__dirname, 'models/package-handler'),
 	path.join(__dirname, 'utils/share-utils'),
 	path.join(__dirname, 'utils/debug-log'),
 	path.join(__dirname, 'utils/get-npm-info')
