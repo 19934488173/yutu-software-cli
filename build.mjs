@@ -19,11 +19,16 @@ const excludeFiles = [
 	'npminstall',
 	'pkg-dir',
 	'fs-extra',
+	'inquirer',
+	'cli-spinner',
+	'user-home',
 	'@yutu-cli/debug-log',
 	'@yutu-cli/get-npm-info',
 	'@yutu-cli/exec',
 	'@yutu-cli/package-handler',
-	'@yutu-cli/share-utils'
+	'@yutu-cli/share-utils',
+	'@yutu-cli/command-handler',
+	'@yutu-cli/init'
 ];
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,6 +38,8 @@ const packages = [
 	path.join(__dirname, 'core/cli'),
 	path.join(__dirname, 'core/exec'),
 	path.join(__dirname, 'models/package-handler'),
+	path.join(__dirname, 'models/command-handler'),
+	path.join(__dirname, 'commands/init'),
 	path.join(__dirname, 'utils/share-utils'),
 	path.join(__dirname, 'utils/debug-log'),
 	path.join(__dirname, 'utils/get-npm-info')

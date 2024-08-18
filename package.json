@@ -8,7 +8,7 @@
 	"license": "ISC",
 	"scripts": {
 		"build": "node build.mjs",
-		"dev": "nodemon --watch core  -e ts --exec \"pnpm run build && node core/cli/dist/index.js -d exec init amber -tp xxxx\""
+		"dev": "nodemon --watch core  -e ts --exec \"pnpm run build && node core/cli/dist/index.js init amber -tp /Users/amber/Documents/amber-git/yutu-cli/commands/init -d @yutu-cli:init\""
 	},
 	"devDependencies": {
 		"@types/node": "^22.2.0",

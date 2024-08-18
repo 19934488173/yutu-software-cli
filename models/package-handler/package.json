@@ -34,5 +34,8 @@
 		"npminstall": "^7.12.0",
 		"path-exists": "^5.0.0",
 		"pkg-dir": "^8.0.0"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^11.0.4"
 	}
 }

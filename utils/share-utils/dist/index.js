@@ -1,22 +1,23 @@
 // utils/share-utils/src/isObject.ts
-function isObject(value) {
+var isObject = (value) => {
   return Object.prototype.toString.call(value) === "[object Object]";
-}
+};
+var isObject_default = isObject;
 
 // utils/share-utils/src/readPackageJson.ts
-import { readFile } from "fs/promises";
+import { readFileSync } from "fs";
 import { join } from "path";
-async function readPackageJson(path2) {
+var readPackageJson = (path2) => {
   try {
     const newPath = path2.replace(/\/dist$/, "");
     const fullPath = join(newPath, "./package.json");
-    const data = await readFile(fullPath, "utf-8");
+    const data = readFileSync(fullPath, "utf-8");
     return JSON.parse(data);
   } catch (error) {
     console.error("Error reading package.json:", error);
     throw error;
   }
-}
+};
 var readPackageJson_default = readPackageJson;
 
 // utils/share-utils/src/format-path.ts
@@ -37,14 +38,26 @@ var spawnPlus = (command, args, options) => {
 };
 var spawn_plus_default = spawnPlus;
 
-// utils/share-utils/src/index.ts
-var shareUtils = {
-  isObject,
-  readPackageJson: readPackageJson_default,
-  formatPath: format_path_default,
-  spawnPlus: spawn_plus_default
+// utils/share-utils/src/sleep.ts
+var sleep = (ms = 1e3) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 };
-var src_default = shareUtils;
+var sleep_default = sleep;
+
+// utils/share-utils/src/spinner-start.ts
+import { Spinner } from "cli-spinner";
+var spinnerStart = (msg, spinnerString = "|/-\\") => {
+  const spinner = new Spinner(msg + " %s");
+  spinner.setSpinnerString(spinnerString);
+  spinner.start();
+  return spinner;
+};
+var spinner_start_default = spinnerStart;
 export {
-  src_default as default
+  format_path_default as formatPath,
+  isObject_default as isObject,
+  readPackageJson_default as readPackageJson,
+  sleep_default as sleep,
+  spawn_plus_default as spawnPlus,
+  spinner_start_default as spinnerStart
 };

@@ -1,29 +1,20 @@
 import { packageDirectorySync } from 'pkg-dir';
 import { pathExistsSync } from 'path-exists';
 import path from 'path';
-import shareUtils from '@yutu-cli/share-utils';
+import { isObject, readPackageJson, formatPath } from '@yutu-cli/share-utils';
 import { getNpmLatestVersion } from '@yutu-cli/get-npm-info';
 import CacheManager from './cacheManager';
 import PackageInstaller from './packageInstaller';
 
-const { isObject, readPackageJson, formatPath } = shareUtils;
-
-interface PackageOptions {
-	targetPath: string;
-	storeDir?: string;
-	packageName: string;
-	packageVersion: string;
-}
-
 /** Package类封装了npm包的管理逻辑，包括安装、更新、判断是否存在等功能 */
 class PackageHandler {
 	private targetPath: string;
-	private storeDir?: string;
 	private packageName: string;
 	private packageVersion: string;
+	private storeDir?: string;
 	private cacheManager?: CacheManager;
 
-	constructor(options: PackageOptions) {
+	constructor(options: InstallOptions) {
 		if (!options) {
 			throw new Error('Package类的options参数不能为空！');
 		}
@@ -40,6 +31,12 @@ class PackageHandler {
 			this.cacheManager = new CacheManager(this.storeDir, this.packageName);
 			this.cacheManager.ensureStoreDirExists(); // 确保缓存目录存在
 		}
+	}
+
+	// 生成当前版本文件路径供外面调用
+	get cacheFilePath() {
+		if (!this.cacheManager) return '';
+		return this.cacheManager.getCacheFilePath(this.packageVersion);
 	}
 
 	/** 准备工作：如果packageVersion是'latest'，获取最新的npm版本号 */
@@ -90,7 +87,8 @@ class PackageHandler {
 				packageVersion: latestPackageVersion
 			});
 		}
-		this.packageVersion = latestPackageVersion; // 更新packageVersion为最新版本
+		// 更新packageVersion为最新版本
+		this.packageVersion = latestPackageVersion;
 	}
 
 	/**
@@ -117,7 +115,8 @@ class PackageHandler {
 				this.cacheManager.getCacheFilePath(this.packageVersion)
 			);
 		} else {
-			return _getRootFile(this.targetPath); // 否则，获取目标路径下的入口文件
+			// 否则，获取目标路径下的入口文件
+			return _getRootFile(this.targetPath);
 		}
 	}
 }

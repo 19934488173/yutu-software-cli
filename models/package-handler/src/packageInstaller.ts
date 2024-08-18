@@ -1,13 +1,6 @@
 import npminstall from 'npminstall';
 import { getDefaultRegistry } from '@yutu-cli/get-npm-info';
 
-interface InstallOptions {
-	targetPath: string;
-	storeDir?: string;
-	packageName: string;
-	packageVersion: string;
-}
-
 /**
  * PackageInstaller类负责处理package的安装逻辑。
  * 通过封装npminstall库，简化package的安装过程。

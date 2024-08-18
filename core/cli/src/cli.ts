@@ -2,20 +2,19 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { Command } from 'commander';
 import chalk from 'chalk';
-import shareUtils from '@yutu-cli/share-utils';
+import { readPackageJson } from '@yutu-cli/share-utils';
 import createLogger from '@yutu-cli/debug-log';
 import exec from '@yutu-cli/exec';
 import prepare from './prepare';
 
-const { readPackageJson } = shareUtils;
 //实例化commander
 const program = new Command();
 
 // 拿到当前目录的package.json
 export let pkg: any;
-async function getPkg() {
+function getPkg() {
 	const __dirname = dirname(fileURLToPath(import.meta.url));
-	pkg = await readPackageJson(__dirname);
+	pkg = readPackageJson(__dirname);
 }
 
 // 脚手架核心入口
@@ -49,9 +48,9 @@ function registerCommand() {
 	//监听debug参数
 	program.on('option:debug', () => {
 		const debugOption = program.getOptionValue('debug');
-		process.env.DEBUG = debugOption !== true ? debugOption : '*';
+		process.env.DEBUG = debugOption === true ? '@yutu-cli:*' : debugOption;
 		// 在设置环境变量后再创建 logger
-		const logger = createLogger('cli');
+		const logger = createLogger('@yutu-cli:cli');
 		logger.info('debug模式已开启');
 	});
 

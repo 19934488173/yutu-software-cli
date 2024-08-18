@@ -490,10 +490,10 @@ var source_default = chalk;
 // utils/debug-log/src/index.ts
 import debug from "debug";
 var createLogger = (namespace) => {
-  if (process.env.DEBUG) {
+  if (process.env.DEBUG || !process.env.DEBUG.includes(namespace)) {
     debug.enable(process.env.DEBUG);
   }
-  const logger = debug(process.env.DEBUG === namespace ? namespace : "");
+  const logger = debug(namespace);
   return {
     log: (...args) => logger(args),
     info: (...args) => logger("INFO:", ...args),

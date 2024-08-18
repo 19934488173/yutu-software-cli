@@ -1,5 +1,5 @@
 {
-	"name": "@imooc-cli-dev/core",
+	"name": "@imooc-cli/cli",
 	"version": "1.0.0",
 	"description": "@yutu-cli cli",
 	"author": "amberHe <1542588809@qq.com>",

@@ -1,7 +1,8 @@
 // utils/share-utils/src/isObject.ts
-function isObject(value) {
+var isObject = (value) => {
   return Object.prototype.toString.call(value) === "[object Object]";
-}
+};
+var isObject_default = isObject;
 export {
-  isObject as default
+  isObject_default as default
 };

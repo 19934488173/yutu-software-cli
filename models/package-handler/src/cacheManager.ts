@@ -8,10 +8,12 @@ import fse from 'fs-extra';
  */
 class CacheManager {
 	private storeDir: string;
+	private packageName: string;
 	private cacheFilePathPrefix: string;
 
 	constructor(storeDir: string, packageName: string) {
 		this.storeDir = storeDir;
+		this.packageName = packageName;
 		// 将package名称中的'/'替换为'+'，用于生成合法的文件名
 		this.cacheFilePathPrefix = packageName.replace('/', '+');
 	}
@@ -27,10 +29,10 @@ class CacheManager {
 
 	/** 生成特定版本的package缓存文件路径 */
 	getCacheFilePath(packageVersion: string) {
-		// 生成缓存文件的完整路径，格式为：{storeDir}/.store/{packageName}@{packageVersion}
+		// 生成缓存文件的完整路径
 		return path.resolve(
 			this.storeDir,
-			`.store/${this.cacheFilePathPrefix}@${packageVersion}`
+			`.store/${this.cacheFilePathPrefix}@${packageVersion}/node_modules/${this.packageName}`
 		);
 	}
 

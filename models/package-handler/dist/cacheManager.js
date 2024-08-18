@@ -16,9 +16,11 @@ function pathExistsSync(path2) {
 import fse from "fs-extra";
 var CacheManager = class {
   storeDir;
+  packageName;
   cacheFilePathPrefix;
   constructor(storeDir, packageName) {
     this.storeDir = storeDir;
+    this.packageName = packageName;
     this.cacheFilePathPrefix = packageName.replace("/", "+");
   }
   /** 确保缓存目录存在， 如果缓存目录不存在，则创建该目录 */
@@ -31,7 +33,7 @@ var CacheManager = class {
   getCacheFilePath(packageVersion) {
     return path.resolve(
       this.storeDir,
-      `.store/${this.cacheFilePathPrefix}@${packageVersion}`
+      `.store/${this.cacheFilePathPrefix}@${packageVersion}/node_modules/${this.packageName}`
     );
   }
   /** 检查特定版本的缓存文件是否存在 */

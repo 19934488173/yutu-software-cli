@@ -1,138 +1,62 @@
-import path from 'path';
 import { Command } from 'commander';
-import PackageHandler from '@yutu-cli/package-handler';
 import createLogger from '@yutu-cli/debug-log';
-import shareUtils from '@yutu-cli/share-utils';
 
-const { spawnPlus } = shareUtils;
+import getOrInstallPackage from './getOrInstallPackage';
+import executeCommand from './executeCommand';
+import { SETTINGS } from './constants';
+import { ExecArgs, PackageType } from './types';
 
-// 定义命令设置类型
-interface Settings {
-	[key: string]: string;
-}
-
-type PackageType = InstanceType<typeof PackageHandler>;
-
-const SETTINGS: Settings = {
-	init: '@imooc-cli/init'
-};
-const CACHE_DIR = 'dependencies';
-// 更通用的类型定义
-type ExecArgs = [...string[], Command];
-
+// 异步执行命令函数
 const exec = async (...args: ExecArgs) => {
-	//命名日志空间为：exec
-	const logger = createLogger('exec');
+	// 命名日志空间为：exec
+	const logger = createLogger('@yutu-cli:exec');
 
 	let pkg: PackageType | undefined;
 
+	// 获取环境变量中的目标路径和主目录路径
 	const targetPath = process.env.CLI_TARGET_PATH ?? '';
 	const homePath = process.env.CLI_HOME_PATH ?? '';
-	//在 .action 回调函数中，commander 总是将命令的 Command 对象作为最后一个参数传递，这样取能保证代码能够适应不同数量的命令行参数。
+
+	// 验证路径是否有效
+	if (!homePath) {
+		throw new Error('CLI_HOME_PATH 未定义');
+	}
+
+	// 从命令行参数中获取最后一个参数Command 对象
 	const cmdObj = args[args.length - 1] as Command;
 	const cmdName = cmdObj.name();
+
+	// 根据命令名称获取包名
 	const packageName = SETTINGS[cmdName];
+	// 默认安装最新版本的包
 	const packageVersion = 'latest';
 
 	logger.log('targetPath', targetPath);
 	logger.log('homePath', homePath);
 
 	try {
+		// 获取或安装包，并返回包的实例
 		pkg = await getOrInstallPackage({
 			targetPath,
 			homePath,
 			packageName,
-			packageVersion
+			packageVersion,
+			logger
 		});
 
+		// 获取包的根文件路径
 		const rootFile = pkg?.getRootFilePath();
+
 		if (rootFile) {
-			executeCommand(rootFile, args);
+			// 如果根文件路径存在，则执行命令
+			executeCommand({ rootFile, args, logger });
 		} else {
 			console.error('未找到可执行的根文件路径');
 		}
 	} catch (error: any) {
-		console.error('执行命令时发生错误: ' + error.message);
+		console.error('执行子进程时发生错误: ' + error.message);
+		process.exit(1);
 	}
 };
-
-async function getOrInstallPackage({
-	targetPath,
-	homePath,
-	packageName,
-	packageVersion
-}: {
-	targetPath: string;
-	homePath: string;
-	packageName: string;
-	packageVersion: string;
-}) {
-	//命名日志空间为：exec
-	const logger = createLogger('exec');
-
-	let pkg: PackageType;
-	let storeDir = '';
-
-	if (!targetPath) {
-		const cachePath = path.resolve(homePath, CACHE_DIR);
-		storeDir = path.resolve(cachePath, 'node_modules');
-
-		logger.log('cachePath', cachePath);
-		logger.log('storeDir', storeDir);
-
-		pkg = new PackageHandler({
-			targetPath: cachePath,
-			storeDir,
-			packageName,
-			packageVersion
-		});
-
-		if (await pkg.exists()) {
-			await pkg.update();
-		} else {
-			await pkg.install();
-		}
-	} else {
-		pkg = new PackageHandler({ targetPath, packageName, packageVersion });
-	}
-	return pkg;
-}
-
-function executeCommand(rootFile: string, args: any[]): void {
-	try {
-		const cleanedArgs = cleanCommandArgs(args);
-		const child = spawnPlus('node', [rootFile, JSON.stringify(cleanedArgs)], {
-			cwd: process.cwd(),
-			stdio: 'inherit'
-		});
-
-		child.on('error', (e) => {
-			console.error('子进程发生错误: ' + e.message);
-			process.exit(1);
-		});
-
-		child.on('exit', (e) => {
-			console.log('命令执行成功');
-			process.exit(e);
-		});
-	} catch (error: any) {
-		console.error('执行子进程时发生错误: ' + error.message);
-	}
-}
-
-function cleanCommandArgs(args: any[]): any[] {
-	const cmd = args[args.length - 1];
-	const cleanedCmd = Object.keys(cmd).reduce(
-		(acc, key) => {
-			if (cmd.hasOwnProperty(key) && !key.startsWith('_') && key !== 'parent') {
-				acc[key] = cmd[key];
-			}
-			return acc;
-		},
-		{} as Record<string, any>
-	);
-	args[args.length - 1] = cleanedCmd;
-	return args;
-}
 
 export default exec;

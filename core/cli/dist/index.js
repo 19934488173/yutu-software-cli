@@ -499,7 +499,7 @@ var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
 // core/cli/src/cli.ts
-import shareUtils from "@yutu-cli/share-utils";
+import { readPackageJson } from "@yutu-cli/share-utils";
 import createLogger from "@yutu-cli/debug-log";
 import exec from "@yutu-cli/exec";
 
@@ -551,12 +551,11 @@ var prepare = async () => {
 var prepare_default = prepare;
 
 // core/cli/src/cli.ts
-var { readPackageJson } = shareUtils;
 var program = new Command();
 var pkg;
-async function getPkg() {
+function getPkg() {
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  pkg = await readPackageJson(__dirname);
+  pkg = readPackageJson(__dirname);
 }
 var cli = async () => {
   try {
@@ -572,8 +571,8 @@ function registerCommand() {
   program.command("init <projectName>").option("-f, --force", "\u5F3A\u5236\u521D\u59CB\u5316\u9879\u76EE").action(exec);
   program.on("option:debug", () => {
     const debugOption = program.getOptionValue("debug");
-    process.env.DEBUG = debugOption !== true ? debugOption : "*";
-    const logger = createLogger("cli");
+    process.env.DEBUG = debugOption === true ? "@yutu-cli:*" : debugOption;
+    const logger = createLogger("@yutu-cli:cli");
     logger.info("debug\u6A21\u5F0F\u5DF2\u5F00\u542F");
   });
   program.on("option:targetPath", () => {

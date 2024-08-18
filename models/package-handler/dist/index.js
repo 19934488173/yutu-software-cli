@@ -14,7 +14,7 @@ function pathExistsSync(path3) {
 
 // models/package-handler/src/index.ts
 import path2 from "path";
-import shareUtils from "@yutu-cli/share-utils";
+import { isObject, readPackageJson, formatPath } from "@yutu-cli/share-utils";
 import { getNpmLatestVersion } from "@yutu-cli/get-npm-info";
 
 // models/package-handler/src/cacheManager.ts
@@ -22,9 +22,11 @@ import path from "path";
 import fse from "fs-extra";
 var CacheManager = class {
   storeDir;
+  packageName;
   cacheFilePathPrefix;
   constructor(storeDir, packageName) {
     this.storeDir = storeDir;
+    this.packageName = packageName;
     this.cacheFilePathPrefix = packageName.replace("/", "+");
   }
   /** 确保缓存目录存在， 如果缓存目录不存在，则创建该目录 */
@@ -37,7 +39,7 @@ var CacheManager = class {
   getCacheFilePath(packageVersion) {
     return path.resolve(
       this.storeDir,
-      `.store/${this.cacheFilePathPrefix}@${packageVersion}`
+      `.store/${this.cacheFilePathPrefix}@${packageVersion}/node_modules/${this.packageName}`
     );
   }
   /** 检查特定版本的缓存文件是否存在 */
@@ -70,12 +72,11 @@ var PackageInstaller = class {
 var packageInstaller_default = PackageInstaller;
 
 // models/package-handler/src/index.ts
-var { isObject, readPackageJson, formatPath } = shareUtils;
 var PackageHandler = class {
   targetPath;
-  storeDir;
   packageName;
   packageVersion;
+  storeDir;
   cacheManager;
   constructor(options) {
     if (!options) {
@@ -92,6 +93,11 @@ var PackageHandler = class {
       this.cacheManager = new cacheManager_default(this.storeDir, this.packageName);
       this.cacheManager.ensureStoreDirExists();
     }
+  }
+  // 生成当前版本文件路径供外面调用
+  get cacheFilePath() {
+    if (!this.cacheManager) return "";
+    return this.cacheManager.getCacheFilePath(this.packageVersion);
   }
   /** 准备工作：如果packageVersion是'latest'，获取最新的npm版本号 */
   async prepare() {
