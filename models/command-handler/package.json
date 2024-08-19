@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/command-handler",
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"@types/semver": "^7.5.8",
-		"@yutu-software-cli/debug-log": "^1.6.1",
+		"@yutu-software-cli/debug-log": "^1.6.2",
 		"chalk": "^5.3.0",
 		"semver": "^7.6.3"
 	},
