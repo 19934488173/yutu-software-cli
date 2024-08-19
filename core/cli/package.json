@@ -24,6 +24,10 @@
 		"semver": "^7.6.3",
 		"userhome": "^1.0.0"
 	},
+	"devDependencies": {
+		"@types/root-check": "^1.0.2",
+		"@types/semver": "^7.5.8"
+	},
 	"directories": {
 		"lib": "dist",
 		"test": "__tests__"
@@ -45,10 +49,6 @@
 	"exports": {
 		".": "./dist/index.js",
 		"./cli": "./dist/cli.js"
-	},
-	"devDependencies": {
-		"@types/root-check": "^1.0.2",
-		"@types/semver": "^7.5.8"
 	},
 	"gitHead": "042c0ab8a857a8f755c1c58195996d520b8c9568"
 }
