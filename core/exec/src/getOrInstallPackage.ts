@@ -1,5 +1,5 @@
 import path from 'path';
-import PackageHandler from '@yutu-cli/package-handler';
+import PackageHandler from '@amber-yutu-cli/package-handler';
 
 import { CACHE_DIR } from './constants';
 import { IGetOrInstallPackage, PackageType } from './types';

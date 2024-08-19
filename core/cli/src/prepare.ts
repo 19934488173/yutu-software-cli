@@ -5,11 +5,11 @@ import dotenv from 'dotenv';
 import semver from 'semver';
 import chalk from 'chalk';
 import { pathExistsSync } from 'path-exists';
-import getNpmSemverVersion from '@yutu-cli/get-npm-info';
+import getNpmSemverVersion from '@amber-yutu-cli/get-npm-info';
 
 import { pkg } from './cli';
 
-const DEFAULT_CLI_HOME = '.yutu-cli';
+const DEFAULT_CLI_HOME = '.amber-yutu-cli';
 
 // 2，检查用户主目录
 const checkHomeDir = () => {

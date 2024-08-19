@@ -1,9 +1,9 @@
 {
-	"name": "@yutu-cli/init",
+	"name": "@amber-yutu-cli/init",
 	"version": "1.1.0-alpha.0",
-	"description": "@yutu-cli init",
+	"description": "@amber-yutu-cli init",
 	"author": "amberHe <1542588809@qq.com>",
-	"homepage": "https://github.com/19934488173/yutu-cli#readme",
+	"homepage": "https://github.com/19934488173/amber-yutu-cli#readme",
 	"license": "ISC",
 	"type": "module",
 	"main": "dist/index.js",
@@ -19,13 +19,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/19934488173/yutu-cli.git"
+		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
 	},
 	"scripts": {
-		"test": "node ./__tests__/@yutu-cli/init.test.js"
+		"test": "node ./__tests__/@amber-yutu-cli/init.test.js"
 	},
 	"bugs": {
-		"url": "https://github.com/19934488173/yutu-cli/issues"
+		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
 	},
 	"devDependencies": {
 		"@types/fs-extra": "^11.0.4",
@@ -33,14 +33,15 @@
 		"@types/user-home": "^2.0.2"
 	},
 	"dependencies": {
-		"@yutu-cli/command-handler": "workspace:*",
-		"@yutu-cli/debug-log": "workspace:*",
-		"@yutu-cli/package-handler": "workspace:*",
-		"@yutu-cli/share-utils": "workspace:*",
+		"@amber-yutu-cli/command-handler": "1.1.0-alpha.0",
+		"@amber-yutu-cli/debug-log": "1.1.0-alpha.0",
+		"@amber-yutu-cli/package-handler": "1.1.0-alpha.0",
+		"@amber-yutu-cli/share-utils": "1.1.0-alpha.0",
 		"fs-extra": "^11.2.0",
 		"inquirer": "^10.1.8",
 		"semver": "^7.6.3",
 		"spinner": "^0.3.4",
 		"user-home": "^3.0.0"
-	}
+	},
+	"gitHead": "960eae4bf04212b767d356d66a70c5ed62ba9afe"
 }

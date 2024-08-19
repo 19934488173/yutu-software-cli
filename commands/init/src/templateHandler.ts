@@ -1,8 +1,8 @@
 import path from 'path';
 import userHome from 'user-home';
-import { sleep, spawnPlus, spinnerStart } from '@yutu-cli/share-utils';
-import PackageHandler from '@yutu-cli/package-handler';
-import createLogger from '@yutu-cli/debug-log';
+import { sleep, spawnPlus, spinnerStart } from '@amber-yutu-cli/share-utils';
+import PackageHandler from '@amber-yutu-cli/package-handler';
+import createLogger from '@amber-yutu-cli/debug-log';
 import {
 	IProjectInfo,
 	IProjectTemplate,
@@ -20,10 +20,10 @@ export const downloadTemplate = async (
 	logger: ReturnType<typeof createLogger>
 ) => {
 	// 设置模板存储路径和 node_modules 目录路径
-	const targetPath = path.resolve(userHome, '.yutu-cli', 'template');
+	const targetPath = path.resolve(userHome, '.amber-yutu-cli', 'template');
 	const storeDir = path.resolve(
 		userHome,
-		'.yutu-cli',
+		'.amber-yutu-cli',
 		'template',
 		'node_modules'
 	);

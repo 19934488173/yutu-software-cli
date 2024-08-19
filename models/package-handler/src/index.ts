@@ -1,8 +1,12 @@
 import { packageDirectorySync } from 'pkg-dir';
 import { pathExistsSync } from 'path-exists';
 import path from 'path';
-import { isObject, readPackageJson, formatPath } from '@yutu-cli/share-utils';
-import { getNpmLatestVersion } from '@yutu-cli/get-npm-info';
+import {
+	isObject,
+	readPackageJson,
+	formatPath
+} from '@amber-yutu-cli/share-utils';
+import { getNpmLatestVersion } from '@amber-yutu-cli/get-npm-info';
 import CacheManager from './cacheManager';
 import PackageInstaller from './packageInstaller';
 

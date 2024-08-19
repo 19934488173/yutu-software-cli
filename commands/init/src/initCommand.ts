@@ -1,5 +1,5 @@
-import CommandHandler from '@yutu-cli/command-handler';
-import createLogger from '@yutu-cli/debug-log';
+import CommandHandler from '@amber-yutu-cli/command-handler';
+import createLogger from '@amber-yutu-cli/debug-log';
 import prepareStage from './prepareStage';
 import { downloadTemplate, installTemplate } from './templateHandler';
 import getProjectTemplate from './projectTemplate';
@@ -13,7 +13,7 @@ class InitCommand extends CommandHandler {
 
 	//初始化命令参数
 	init() {
-		this.logger = createLogger('@yutu-cli:init');
+		this.logger = createLogger('@amber-yutu-cli:init');
 
 		this.projectName = this._argv[0] || '';
 		this.force = this._argv[1]?.force || false;

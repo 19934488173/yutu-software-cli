@@ -1,5 +1,5 @@
 import npminstall from 'npminstall';
-import { getDefaultRegistry } from '@yutu-cli/get-npm-info';
+import { getDefaultRegistry } from '@amber-yutu-cli/get-npm-info';
 
 /**
  * PackageInstaller类负责处理package的安装逻辑。

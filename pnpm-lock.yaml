@@ -54,16 +54,16 @@ importers:
 
   commands/init:
     dependencies:
-      '@yutu-cli/command-handler':
+      '@amber-yutu-cli/command-handler':
         specifier: workspace:*
         version: link:../../models/command-handler
-      '@yutu-cli/debug-log':
+      '@amber-yutu-cli/debug-log':
         specifier: workspace:*
         version: link:../../utils/debug-log
-      '@yutu-cli/package-handler':
+      '@amber-yutu-cli/package-handler':
         specifier: workspace:*
         version: link:../../models/package-handler
-      '@yutu-cli/share-utils':
+      '@amber-yutu-cli/share-utils':
         specifier: workspace:*
         version: link:../../utils/share-utils
       fs-extra:
@@ -94,16 +94,16 @@ importers:
 
   core/cli:
     dependencies:
-      '@yutu-cli/debug-log':
+      '@amber-yutu-cli/debug-log':
         specifier: workspace:*
         version: link:../../utils/debug-log
-      '@yutu-cli/exec':
+      '@amber-yutu-cli/exec':
         specifier: workspace:*
         version: link:../exec
-      '@yutu-cli/get-npm-info':
+      '@amber-yutu-cli/get-npm-info':
         specifier: workspace:*
         version: link:../../utils/get-npm-info
-      '@yutu-cli/share-utils':
+      '@amber-yutu-cli/share-utils':
         specifier: workspace:*
         version: link:../../utils/share-utils
       chalk:
@@ -140,13 +140,13 @@ importers:
 
   core/exec:
     dependencies:
-      '@yutu-cli/debug-log':
+      '@amber-yutu-cli/debug-log':
         specifier: workspace:*
         version: link:../../utils/debug-log
-      '@yutu-cli/package-handler':
+      '@amber-yutu-cli/package-handler':
         specifier: workspace:*
         version: link:../../models/package-handler
-      '@yutu-cli/share-utils':
+      '@amber-yutu-cli/share-utils':
         specifier: workspace:*
         version: link:../../utils/share-utils
       commander:
@@ -158,7 +158,7 @@ importers:
       '@types/semver':
         specifier: ^7.5.8
         version: 7.5.8
-      '@yutu-cli/debug-log':
+      '@amber-yutu-cli/debug-log':
         specifier: workspace:*
         version: link:../../utils/debug-log
       chalk:
@@ -170,10 +170,10 @@ importers:
 
   models/package-handler:
     dependencies:
-      '@yutu-cli/get-npm-info':
+      '@amber-yutu-cli/get-npm-info':
         specifier: workspace:*
         version: link:../../utils/get-npm-info
-      '@yutu-cli/share-utils':
+      '@amber-yutu-cli/share-utils':
         specifier: workspace:*
         version: link:../../utils/share-utils
       fs-extra:

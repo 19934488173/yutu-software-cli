@@ -1,6 +1,6 @@
 import { Command } from 'commander';
-import PackageHandler from '@yutu-cli/package-handler';
-import createLogger from '@yutu-cli/debug-log';
+import PackageHandler from '@amber-yutu-cli/package-handler';
+import createLogger from '@amber-yutu-cli/debug-log';
 
 // 命令的配置
 export interface Settings {
