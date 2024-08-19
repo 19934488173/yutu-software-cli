@@ -36,7 +36,7 @@ const getProjectInfo = async (projectName: string) => {
 
 	// 项目模版
 	if (type === TYPE_PROJECT) {
-		const project = await inquirer.prompt([
+		const project: any = await inquirer.prompt([
 			{
 				type: 'input',
 				name: 'projectName',
@@ -68,7 +68,7 @@ const getProjectInfo = async (projectName: string) => {
 	}
 	/// 组件模版
 	if (type === TYPE_COMPONENT) {
-		projectInfo = { type };
+		// projectInfo = { type };
 	}
 
 	return projectInfo;

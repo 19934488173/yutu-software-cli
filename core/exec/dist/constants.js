@@ -1,6 +1,6 @@
 // core/exec/src/constants.ts
 var SETTINGS = {
-  init: "@imooc-cli/init"
+  init: "@yutu-cli/init"
 };
 var CACHE_DIR = "dependencies";
 export {

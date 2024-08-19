@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import { emptyDirSync, isDirEmpty } from './fsUtils';
 import getProjectTemplate from './projectTemplate';
-import { IPrepareOptions, IProjectInfo } from './types';
+import { IPrepareOptions } from './types';
 import getProjectInfo from './projectInfoHandler';
 
 //准备阶段逻辑

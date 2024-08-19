@@ -7,7 +7,14 @@ import { fileURLToPath as fileURLToPath2 } from "url";
 // core/cli/src/cli.ts
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import { Command } from "commander";
+import { readPackageJson } from "@yutu-cli/share-utils";
+
+// core/cli/src/prepare.ts
+import rootCheck from "root-check";
+import userhome from "userhome";
+import path from "path";
+import dotenv from "dotenv";
+import semver from "semver";
 
 // node_modules/.pnpm/chalk@5.3.0/node_modules/chalk/source/vendor/ansi-styles/index.js
 var ANSI_BACKGROUND_OFFSET = 10;
@@ -498,18 +505,6 @@ var chalk = createChalk();
 var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
-// core/cli/src/cli.ts
-import { readPackageJson } from "@yutu-cli/share-utils";
-import createLogger from "@yutu-cli/debug-log";
-import exec from "@yutu-cli/exec";
-
-// core/cli/src/prepare.ts
-import rootCheck from "root-check";
-import userhome from "userhome";
-import path from "path";
-import dotenv from "dotenv";
-import semver from "semver";
-
 // node_modules/.pnpm/path-exists@5.0.0/node_modules/path-exists/index.js
 import fs, { promises as fsPromises } from "node:fs";
 function pathExistsSync(path2) {
@@ -550,23 +545,12 @@ var prepare = async () => {
 };
 var prepare_default = prepare;
 
-// core/cli/src/cli.ts
+// core/cli/src/registerCommand.ts
+import { Command } from "commander";
+import createLogger from "@yutu-cli/debug-log";
+import exec from "@yutu-cli/exec";
 var program = new Command();
-var pkg;
-function getPkg() {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  pkg = readPackageJson(__dirname);
-}
-var cli = async () => {
-  try {
-    await getPkg();
-    await prepare_default();
-    registerCommand();
-  } catch (error) {
-    console.log(error);
-  }
-};
-function registerCommand() {
+var registerCommand = () => {
   program.name(Object.keys(pkg.bin)[0]).version(pkg.version).usage("<command> [options]").option("-d, --debug [namespace]", "\u5F00\u542F\u8C03\u8BD5\u6A21\u5F0F", false).option("-tp, --targetPath <targetPath>", "\u6307\u5B9A\u672C\u5730\u8C03\u8BD5\u6587\u4EF6\u76EE\u6807\u8DEF\u5F84", "");
   program.command("init <projectName>").option("-f, --force", "\u5F3A\u5236\u521D\u59CB\u5316\u9879\u76EE").action(exec);
   program.on("option:debug", () => {
@@ -584,7 +568,24 @@ function registerCommand() {
     program.help();
   });
   program.parse(process.argv);
-}
+};
+var registerCommand_default = registerCommand;
+
+// core/cli/src/cli.ts
+var pkg;
+var getPkg = () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  pkg = readPackageJson(__dirname);
+};
+var cli = async () => {
+  try {
+    getPkg();
+    await prepare_default();
+    registerCommand_default();
+  } catch (error) {
+    console.log(error);
+  }
+};
 var cli_default = cli;
 
 // core/cli/src/index.ts

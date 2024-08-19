@@ -75,7 +75,6 @@ var getProjectInfo = async (projectName) => {
     projectInfo = { type, ...project };
   }
   if (type === TYPE_COMPONENT) {
-    projectInfo = { type };
   }
   return projectInfo;
 };

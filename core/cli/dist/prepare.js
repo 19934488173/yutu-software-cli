@@ -20,8 +20,10 @@ function pathExistsSync(path2) {
 import getNpmSemverVersion from "@yutu-cli/get-npm-info";
 
 // core/cli/src/cli.ts
-import { Command } from "commander";
 import { readPackageJson } from "@yutu-cli/share-utils";
+
+// core/cli/src/registerCommand.ts
+import { Command } from "commander";
 import createLogger from "@yutu-cli/debug-log";
 import exec from "@yutu-cli/exec";
 var program = new Command();

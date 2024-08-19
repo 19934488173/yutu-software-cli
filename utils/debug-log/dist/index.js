@@ -494,17 +494,18 @@ var createLogger = (namespace) => {
     debug.enable(process.env.DEBUG);
   }
   const logger = debug(namespace);
+  const logWithColor = (prefix, colorFn, ...args) => {
+    const coloredArgs = args.map(
+      (arg) => typeof arg === "string" ? colorFn(arg) : arg
+    );
+    logger(prefix, ...coloredArgs);
+  };
   return {
     log: (...args) => logger(args),
     info: (...args) => logger("INFO:", ...args),
-    warn: (...args) => {
-      const coloredArgs = args.map((arg) => source_default.yellow(arg));
-      logger("WARN:", ...coloredArgs);
-    },
-    error: (...args) => {
-      const coloredArgs = args.map((arg) => source_default.red(arg));
-      logger("ERROR:", ...coloredArgs);
-    }
+    success: (...args) => logWithColor("SUCCESS:", source_default.green, ...args),
+    warn: (...args) => logWithColor("WARN:", source_default.yellow, ...args),
+    error: (...args) => logWithColor("ERROR:", source_default.red, ...args)
   };
 };
 var src_default = createLogger;

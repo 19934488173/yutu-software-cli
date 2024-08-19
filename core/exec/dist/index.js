@@ -7,7 +7,7 @@ import PackageHandler from "@yutu-cli/package-handler";
 
 // core/exec/src/constants.ts
 var SETTINGS = {
-  init: "@imooc-cli/init"
+  init: "@yutu-cli/init"
 };
 var CACHE_DIR = "dependencies";
 
@@ -20,13 +20,8 @@ var resolveCachePath = (homePath, dir) => {
 var getOrInstallPackage = async (options) => {
   const { targetPath, homePath, packageName, packageVersion, logger } = options;
   let pkg;
-  let storeDir = "";
   if (!targetPath) {
-    const { cachePath, storeDir: resolvedStoreDir } = resolveCachePath(
-      homePath,
-      CACHE_DIR
-    );
-    storeDir = resolvedStoreDir;
+    const { cachePath, storeDir } = resolveCachePath(homePath, CACHE_DIR);
     logger.log("cachePath", cachePath);
     logger.log("storeDir", storeDir);
     pkg = new PackageHandler({
@@ -113,10 +108,10 @@ var exec = async (...args) => {
     if (rootFile) {
       executeCommand_default({ rootFile, args, logger });
     } else {
-      console.error("\u672A\u627E\u5230\u53EF\u6267\u884C\u7684\u6839\u6587\u4EF6\u8DEF\u5F84");
+      logger.error("\u672A\u627E\u5230\u53EF\u6267\u884C\u7684\u6839\u6587\u4EF6\u8DEF\u5F84");
     }
   } catch (error) {
-    console.error("\u6267\u884C\u5B50\u8FDB\u7A0B\u65F6\u53D1\u751F\u9519\u8BEF: " + error.message);
+    logger.error("\u6267\u884C\u5B50\u8FDB\u7A0B\u65F6\u53D1\u751F\u9519\u8BEF: " + error.message);
     process.exit(1);
   }
 };

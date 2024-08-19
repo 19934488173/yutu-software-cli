@@ -4,7 +4,7 @@ import inquirer2 from "inquirer";
 // commands/init/src/fsUtils.ts
 import fs from "fs";
 import pkg from "fs-extra";
-var { emptyDirSync, ensureDirSync, copySync } = pkg;
+var { emptyDirSync, ensureDirSync, copySync, existsSync } = pkg;
 function isDirEmpty(localPath) {
   let fileList = fs.readdirSync(localPath);
   fileList = fileList.filter(
@@ -90,7 +90,6 @@ var getProjectInfo = async (projectName) => {
     projectInfo = { type, ...project };
   }
   if (type === TYPE_COMPONENT) {
-    projectInfo = { type };
   }
   return projectInfo;
 };

@@ -51,10 +51,10 @@ const exec = async (...args: ExecArgs) => {
 			// 如果根文件路径存在，则执行命令
 			executeCommand({ rootFile, args, logger });
 		} else {
-			console.error('未找到可执行的根文件路径');
+			logger.error('未找到可执行的根文件路径');
 		}
 	} catch (error: any) {
-		console.error('执行子进程时发生错误: ' + error.message);
+		logger.error('执行子进程时发生错误: ' + error.message);
 		process.exit(1);
 	}
 };

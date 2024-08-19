@@ -1,7 +1,7 @@
 // commands/init/src/templateHandler.ts
 import path from "path";
 import userHome from "user-home";
-import { sleep, spinnerStart } from "@yutu-cli/share-utils";
+import { sleep, spawnPlus, spinnerStart } from "@yutu-cli/share-utils";
 import PackageHandler from "@yutu-cli/package-handler";
 
 // commands/init/src/types.ts
@@ -10,7 +10,7 @@ var TEMPLATE_TYPE_CUSTOM = "custom";
 
 // commands/init/src/fsUtils.ts
 import pkg from "fs-extra";
-var { emptyDirSync, ensureDirSync, copySync } = pkg;
+var { emptyDirSync, ensureDirSync, copySync, existsSync } = pkg;
 
 // commands/init/src/templateHandler.ts
 var templateNpmInfo;
@@ -51,7 +51,7 @@ var downloadTemplate = async (templateInfo, logger) => {
     spinner.stop(true);
   }
 };
-var installTemplate = async (templateInfo, logger) => {
+var installTemplate = async (templateInfo, projectInfo, logger) => {
   try {
     templateInfo.type = templateInfo.type || TEMPLATE_TYPE_NORMAL;
     switch (templateInfo.type) {
@@ -59,7 +59,7 @@ var installTemplate = async (templateInfo, logger) => {
         await installNormalTemplate(templateInfo, logger);
         break;
       case TEMPLATE_TYPE_CUSTOM:
-        await installCustomTemplate();
+        await installCustomTemplate(templateInfo, projectInfo, logger);
         break;
       default:
         throw new Error(`\u65E0\u6CD5\u8BC6\u522B\u7684\u9879\u76EE\u6A21\u677F\u7C7B\u578B: ${templateInfo.type}`);
@@ -93,7 +93,27 @@ var installNormalTemplate = async (templateInfo, logger) => {
     logger.info("\u6A21\u677F\u5B89\u88C5\u6210\u529F");
   }
 };
-var installCustomTemplate = async () => {
+var installCustomTemplate = async (templateInfo, projectInfo, logger) => {
+  const { exists, getRootFilePath, cacheFilePath } = templateNpmInfo;
+  if (!await exists()) {
+    logger.warn("\u6A21\u677F\u4FE1\u606F\u4E0D\u5B58\u5728\uFF0C\u5B89\u88C5\u7EC8\u6B62");
+    return;
+  }
+  const rootFile = getRootFilePath() || "";
+  if (!existsSync(rootFile)) {
+    logger.warn("\u6A21\u677F\u4E3B\u5165\u53E3\u6587\u4EF6\u4E0D\u5B58\u5728\uFF0C\u5B89\u88C5\u7EC8\u6B62");
+    return;
+  }
+  logger.info("\u5F00\u59CB\u6267\u884C\u81EA\u5B9A\u4E49\u6A21\u677F");
+  const templatePath = path.resolve(cacheFilePath, "template");
+  const options = {
+    templateInfo,
+    projectInfo,
+    sourcePath: templatePath,
+    targetPath: process.cwd()
+  };
+  await spawnPlus("node", [rootFile, JSON.stringify(options)]);
+  logger.success("\u81EA\u5B9A\u4E49\u6A21\u677F\u5B89\u88C5\u6210\u529F");
 };
 export {
   downloadTemplate,

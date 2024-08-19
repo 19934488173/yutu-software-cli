@@ -1,14 +1,15 @@
 import path from 'path';
 import userHome from 'user-home';
-import { sleep, spinnerStart } from '@yutu-cli/share-utils';
+import { sleep, spawnPlus, spinnerStart } from '@yutu-cli/share-utils';
 import PackageHandler from '@yutu-cli/package-handler';
 import createLogger from '@yutu-cli/debug-log';
 import {
+	IProjectInfo,
 	IProjectTemplate,
 	TEMPLATE_TYPE_CUSTOM,
 	TEMPLATE_TYPE_NORMAL
 } from './types';
-import { copySync, ensureDirSync } from './fsUtils';
+import { copySync, ensureDirSync, existsSync } from './fsUtils';
 
 // 存储
 let templateNpmInfo: PackageHandler;
@@ -74,6 +75,7 @@ export const downloadTemplate = async (
 /** 安装模版 */
 export const installTemplate = async (
 	templateInfo: IProjectTemplate,
+	projectInfo: IProjectInfo,
 	logger: ReturnType<typeof createLogger>
 ) => {
 	try {
@@ -89,7 +91,7 @@ export const installTemplate = async (
 
 			case TEMPLATE_TYPE_CUSTOM:
 				// 自定义模板安装流程
-				await installCustomTemplate();
+				await installCustomTemplate(templateInfo, projectInfo, logger);
 				break;
 
 			default:
@@ -143,4 +145,42 @@ export const installNormalTemplate = async (
 };
 
 /** custom模版安装 */
-export const installCustomTemplate = async () => {};
+export const installCustomTemplate = async (
+	templateInfo: IProjectTemplate,
+	projectInfo: IProjectInfo,
+	logger: ReturnType<typeof createLogger>
+) => {
+	// 解构 templateNpmInfo 以获取需要的属性
+	const { exists, getRootFilePath, cacheFilePath } = templateNpmInfo;
+
+	// 检查模板信息是否存在，若不存在则提前返回
+	if (!(await exists())) {
+		logger.warn('模板信息不存在，安装终止');
+		return;
+	}
+
+	// 获取模板的主入口文件路径
+	const rootFile = getRootFilePath() || '';
+
+	// 检查主入口文件是否存在，若不存在则提前返回
+	if (!existsSync(rootFile)) {
+		logger.warn('模板主入口文件不存在，安装终止');
+		return;
+	}
+
+	logger.info('开始执行自定义模板');
+
+	// 构建模板路径和安装选项
+	const templatePath = path.resolve(cacheFilePath, 'template');
+	const options = {
+		templateInfo,
+		projectInfo,
+		sourcePath: templatePath,
+		targetPath: process.cwd()
+	};
+
+	// 执行模板的主入口文件
+	await spawnPlus('node', [rootFile, JSON.stringify(options)]);
+
+	logger.success('自定义模板安装成功');
+};

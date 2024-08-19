@@ -1,7 +1,7 @@
 import fs from 'fs';
 import pkg from 'fs-extra';
 
-const { emptyDirSync, ensureDirSync, copySync } = pkg;
+const { emptyDirSync, ensureDirSync, copySync, existsSync } = pkg;
 
 // 判断目录是否为空
 export function isDirEmpty(localPath: string) {
@@ -14,4 +14,4 @@ export function isDirEmpty(localPath: string) {
 }
 
 // 导出其他文件系统相关的函数
-export { emptyDirSync, ensureDirSync, copySync };
+export { emptyDirSync, ensureDirSync, copySync, existsSync };

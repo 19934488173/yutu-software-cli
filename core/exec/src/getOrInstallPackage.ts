@@ -16,15 +16,10 @@ const getOrInstallPackage = async (options: IGetOrInstallPackage) => {
 	const { targetPath, homePath, packageName, packageVersion, logger } = options;
 
 	let pkg: PackageType;
-	let storeDir = '';
 
 	if (!targetPath) {
 		// 解析缓存路径并生成存储目录路径
-		const { cachePath, storeDir: resolvedStoreDir } = resolveCachePath(
-			homePath,
-			CACHE_DIR
-		);
-		storeDir = resolvedStoreDir;
+		const { cachePath, storeDir } = resolveCachePath(homePath, CACHE_DIR);
 
 		logger.log('cachePath', cachePath);
 		logger.log('storeDir', storeDir);

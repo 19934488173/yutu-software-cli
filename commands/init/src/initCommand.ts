@@ -48,7 +48,7 @@ class InitCommand extends CommandHandler {
 				// 2,调用 downloadTemplate 函数，下载模板
 				await downloadTemplate(templateInfo, this.logger!);
 				// 3,调用 installTemplate 函数，安装模板
-				await installTemplate(templateInfo, this.logger!);
+				await installTemplate(templateInfo, projectInfo, this.logger!);
 			}
 		} catch (e) {
 			this.logger?.error(e);

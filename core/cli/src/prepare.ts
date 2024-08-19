@@ -63,7 +63,7 @@ const checkVersion = async () => {
 	}
 };
 
-//检查准备
+//操作系统执行准备阶段
 const prepare = async () => {
 	/** 1，检查root账户：这里可以用node的process.geteuid()，但是有系统兼容性问题，用第三方库更稳定
 	 * root-check 库会在检测到 root 权限时自动退出并显示警告信息。

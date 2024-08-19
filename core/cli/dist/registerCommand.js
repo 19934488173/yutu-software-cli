@@ -1,14 +1,5 @@
-// core/cli/src/cli.ts
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { readPackageJson } from "@yutu-cli/share-utils";
-
-// core/cli/src/prepare.ts
-import rootCheck from "root-check";
-import userhome from "userhome";
-import path from "path";
-import dotenv from "dotenv";
-import semver from "semver";
+// core/cli/src/registerCommand.ts
+import { Command } from "commander";
 
 // node_modules/.pnpm/chalk@5.3.0/node_modules/chalk/source/vendor/ansi-styles/index.js
 var ANSI_BACKGROUND_OFFSET = 10;
@@ -499,50 +490,24 @@ var chalk = createChalk();
 var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
-// node_modules/.pnpm/path-exists@5.0.0/node_modules/path-exists/index.js
-import fs, { promises as fsPromises } from "node:fs";
-function pathExistsSync(path2) {
-  try {
-    fs.accessSync(path2);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// core/cli/src/prepare.ts
-import getNpmSemverVersion from "@yutu-cli/get-npm-info";
-var DEFAULT_CLI_HOME = ".yutu-cli";
-var checkHomeDir = () => {
-  const homeDir = userhome();
-  if (!homeDir || !pathExistsSync(homeDir)) {
-    throw new Error("\u65E0\u6CD5\u83B7\u53D6\u7528\u6237\u4E3B\u76EE\u5F55");
-  }
-};
-var checkEnv = () => {
-  const homeDir = userhome();
-  const cliConfig = {
-    home: homeDir,
-    cliHome: ""
-  };
-  const dotenvPath = path.resolve(homeDir, ".env");
-  if (pathExistsSync(dotenvPath)) {
-    dotenv.config({ path: dotenvPath });
-  }
-  cliConfig.cliHome = process.env.CLI_HOME ? path.join(homeDir, process.env.CLI_HOME) : path.join(homeDir, DEFAULT_CLI_HOME);
-  process.env.CLI_HOME_PATH = cliConfig.cliHome;
-};
-var prepare = async () => {
-  rootCheck();
-  checkHomeDir();
-  checkEnv();
-};
-var prepare_default = prepare;
-
 // core/cli/src/registerCommand.ts
-import { Command } from "commander";
 import createLogger from "@yutu-cli/debug-log";
 import exec from "@yutu-cli/exec";
+
+// core/cli/src/cli.ts
+import { readPackageJson } from "@yutu-cli/share-utils";
+
+// core/cli/src/prepare.ts
+import rootCheck from "root-check";
+import userhome from "userhome";
+import dotenv from "dotenv";
+import semver from "semver";
+import getNpmSemverVersion from "@yutu-cli/get-npm-info";
+
+// core/cli/src/cli.ts
+var pkg;
+
+// core/cli/src/registerCommand.ts
 var program = new Command();
 var registerCommand = () => {
   program.name(Object.keys(pkg.bin)[0]).version(pkg.version).usage("<command> [options]").option("-d, --debug [namespace]", "\u5F00\u542F\u8C03\u8BD5\u6A21\u5F0F", false).option("-tp, --targetPath <targetPath>", "\u6307\u5B9A\u672C\u5730\u8C03\u8BD5\u6587\u4EF6\u76EE\u6807\u8DEF\u5F84", "");
@@ -564,24 +529,6 @@ var registerCommand = () => {
   program.parse(process.argv);
 };
 var registerCommand_default = registerCommand;
-
-// core/cli/src/cli.ts
-var pkg;
-var getPkg = () => {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  pkg = readPackageJson(__dirname);
-};
-var cli = async () => {
-  try {
-    getPkg();
-    await prepare_default();
-    registerCommand_default();
-  } catch (error) {
-    console.log(error);
-  }
-};
-var cli_default = cli;
 export {
-  cli_default as default,
-  pkg
+  registerCommand_default as default
 };

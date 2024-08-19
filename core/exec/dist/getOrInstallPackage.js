@@ -14,13 +14,8 @@ var resolveCachePath = (homePath, dir) => {
 var getOrInstallPackage = async (options) => {
   const { targetPath, homePath, packageName, packageVersion, logger } = options;
   let pkg;
-  let storeDir = "";
   if (!targetPath) {
-    const { cachePath, storeDir: resolvedStoreDir } = resolveCachePath(
-      homePath,
-      CACHE_DIR
-    );
-    storeDir = resolvedStoreDir;
+    const { cachePath, storeDir } = resolveCachePath(homePath, CACHE_DIR);
     logger.log("cachePath", cachePath);
     logger.log("storeDir", storeDir);
     pkg = new PackageHandler({

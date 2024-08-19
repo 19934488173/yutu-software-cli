@@ -15,17 +15,24 @@ const createLogger = (namespace: string) => {
 
 	const logger = debug(namespace);
 
+	// 通用的日志打印方法
+	const logWithColor = (
+		prefix: string,
+		colorFn: (text: string) => string,
+		...args: any[]
+	) => {
+		const coloredArgs = args.map((arg) =>
+			typeof arg === 'string' ? colorFn(arg) : arg
+		);
+		logger(prefix, ...coloredArgs);
+	};
+
 	return {
 		log: (...args: any[]) => logger(args),
 		info: (...args: any[]) => logger('INFO:', ...args),
-		warn: (...args: any[]) => {
-			const coloredArgs = args.map((arg) => chalk.yellow(arg));
-			logger('WARN:', ...coloredArgs);
-		},
-		error: (...args: any[]) => {
-			const coloredArgs = args.map((arg) => chalk.red(arg));
-			logger('ERROR:', ...coloredArgs);
-		}
+		success: (...args: any[]) => logWithColor('SUCCESS:', chalk.green, ...args),
+		warn: (...args: any[]) => logWithColor('WARN:', chalk.yellow, ...args),
+		error: (...args: any[]) => logWithColor('ERROR:', chalk.red, ...args)
 	};
 };
 
