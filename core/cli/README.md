@@ -7,5 +7,5 @@
 ```
 import cli from '@yutu-software-cli/cli';
 
-// TODO: DEMONSTRATE API
+// TODO: DEMONSTRATE API 测试
 ```
