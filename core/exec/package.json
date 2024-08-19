@@ -1,15 +1,15 @@
 {
 	"name": "@yutu-software-cli/exec",
-	"version": "1.5.0-alpha.0",
+	"version": "1.6.0-alpha.0",
 	"description": "@yutu/cli exec",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/amber-yutu-cli#readme",
 	"license": "ISC",
 	"main": "dist/index.js",
 	"dependencies": {
-		"@yutu-software-cli/debug-log": "^1.5.0-alpha.0",
-		"@yutu-software-cli/package-handler": "^1.5.0-alpha.0",
-		"@yutu-software-cli/share-utils": "^1.5.0-alpha.0",
+		"@yutu-software-cli/debug-log": "^1.6.0-alpha.0",
+		"@yutu-software-cli/package-handler": "^1.6.0-alpha.0",
+		"@yutu-software-cli/share-utils": "^1.6.0-alpha.0",
 		"commander": "^12.1.0"
 	},
 	"directories": {
