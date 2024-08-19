@@ -1,5 +1,5 @@
 {
-	"name": "@amber-yutu-cli/add",
+	"name": "@yutu-software-cli/add",
 	"version": "1.5.0-alpha.0",
 	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
@@ -22,11 +22,11 @@
 		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
 	},
 	"scripts": {
-		"test": "node ./__tests__/@amber-yutu-cli/add.test.js"
+		"test": "node ./__tests__/@yutu-software-cli/add.test.js"
 	},
 	"type": "module",
 	"bugs": {
 		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
 	},
-	"gitHead": "0134193aaf33cb83d8ec280da284e7c97a9efd4f"
+	"gitHead": "052addaf3d32a02df04cb17e29fd220d5e6c4fad"
 }

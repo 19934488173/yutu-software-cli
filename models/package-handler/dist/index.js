@@ -18,8 +18,8 @@ import {
 	isObject,
 	readPackageJson,
 	formatPath
-} from '@amber-yutu-cli/share-utils';
-import { getNpmLatestVersion } from '@amber-yutu-cli/get-npm-info';
+} from '@yutu-software-cli/share-utils';
+import { getNpmLatestVersion } from '@yutu-software-cli/get-npm-info';
 
 // models/package-handler/src/cacheManager.ts
 import path from 'path';
@@ -56,7 +56,7 @@ var cacheManager_default = CacheManager;
 
 // models/package-handler/src/packageInstaller.ts
 import npminstall from 'npminstall';
-import { getDefaultRegistry } from '@amber-yutu-cli/get-npm-info';
+import { getDefaultRegistry } from '@yutu-software-cli/get-npm-info';
 var PackageInstaller = class {
 	static async installPackage(options) {
 		const { targetPath, storeDir, packageName, packageVersion } = options;

@@ -17,15 +17,15 @@ function pathExistsSync(path2) {
 }
 
 // core/cli/src/prepare.ts
-import getNpmSemverVersion from '@amber-yutu-cli/get-npm-info';
+import getNpmSemverVersion from '@yutu-software-cli/get-npm-info';
 
 // core/cli/src/cli.ts
-import { readPackageJson } from '@amber-yutu-cli/share-utils';
+import { readPackageJson } from '@yutu-software-cli/share-utils';
 
 // core/cli/src/registerCommand.ts
 import { Command } from 'commander';
-import createLogger from '@amber-yutu-cli/debug-log';
-import exec from '@amber-yutu-cli/exec';
+import createLogger from '@yutu-software-cli/debug-log';
+import exec from '@yutu-software-cli/exec';
 var program = new Command();
 
 // core/cli/src/prepare.ts

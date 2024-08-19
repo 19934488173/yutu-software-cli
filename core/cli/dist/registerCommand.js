@@ -579,18 +579,18 @@ var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
 // core/cli/src/registerCommand.ts
-import createLogger from '@amber-yutu-cli/debug-log';
-import exec from '@amber-yutu-cli/exec';
+import createLogger from '@yutu-software-cli/debug-log';
+import exec from '@yutu-software-cli/exec';
 
 // core/cli/src/cli.ts
-import { readPackageJson } from '@amber-yutu-cli/share-utils';
+import { readPackageJson } from '@yutu-software-cli/share-utils';
 
 // core/cli/src/prepare.ts
 import rootCheck from 'root-check';
 import userhome from 'userhome';
 import dotenv from 'dotenv';
 import semver from 'semver';
-import getNpmSemverVersion from '@amber-yutu-cli/get-npm-info';
+import getNpmSemverVersion from '@yutu-software-cli/get-npm-info';
 
 // core/cli/src/cli.ts
 var pkg;
@@ -619,8 +619,8 @@ var registerCommand = () => {
 	program.on('option:debug', () => {
 		const debugOption = program.getOptionValue('debug');
 		process.env.DEBUG =
-			debugOption === true ? '@amber-yutu-cli:*' : debugOption;
-		const logger = createLogger('@amber-yutu-cli:cli');
+			debugOption === true ? '@yutu-software-cli:*' : debugOption;
+		const logger = createLogger('@yutu-software-cli:cli');
 		logger.info('debug\u6A21\u5F0F\u5DF2\u5F00\u542F');
 	});
 	program.on('option:targetPath', () => {

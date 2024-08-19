@@ -1,5 +1,5 @@
 {
-	"name": "@amber-yutu-cli/exec",
+	"name": "@yutu-software-cli/exec",
 	"version": "1.5.0-alpha.0",
 	"description": "@yutu/cli exec",
 	"author": "amberHe <1542588809@qq.com>",
@@ -7,9 +7,9 @@
 	"license": "ISC",
 	"main": "dist/index.js",
 	"dependencies": {
-		"@amber-yutu-cli/debug-log": "^1.5.0-alpha.0",
-		"@amber-yutu-cli/package-handler": "^1.5.0-alpha.0",
-		"@amber-yutu-cli/share-utils": "^1.5.0-alpha.0",
+		"@yutu-software-cli/debug-log": "^1.5.0-alpha.0",
+		"@yutu-software-cli/package-handler": "^1.5.0-alpha.0",
+		"@yutu-software-cli/share-utils": "^1.5.0-alpha.0",
 		"commander": "^12.1.0"
 	},
 	"directories": {
@@ -27,11 +27,11 @@
 		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
 	},
 	"scripts": {
-		"test": "node ./__tests__/@amber-yutu-cli/exec.test.js"
+		"test": "node ./__tests__/@yutu-software-cli/exec.test.js"
 	},
 	"type": "module",
 	"bugs": {
 		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
 	},
-	"gitHead": "0134193aaf33cb83d8ec280da284e7c97a9efd4f"
+	"gitHead": "052addaf3d32a02df04cb17e29fd220d5e6c4fad"
 }

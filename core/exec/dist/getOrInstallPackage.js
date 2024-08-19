@@ -1,6 +1,6 @@
 // core/exec/src/getOrInstallPackage.ts
 import path from 'path';
-import PackageHandler from '@amber-yutu-cli/package-handler';
+import PackageHandler from '@yutu-software-cli/package-handler';
 
 // core/exec/src/constants.ts
 var CACHE_DIR = 'dependencies';

@@ -579,14 +579,14 @@ var chalkStderr = createChalk({ level: stderrColor ? stderrColor.level : 0 });
 var source_default = chalk;
 
 // models/command-handler/src/index.ts
-import createLogger from '@amber-yutu-cli/debug-log';
+import createLogger from '@yutu-software-cli/debug-log';
 var LOWEST_NODE_VERSION = '12.0.0';
 var CommandHandler = class {
 	_argv;
 	_cmd;
 	runner;
 	constructor(argv) {
-		const logger = createLogger('@amber-yutu-cli:command-handler');
+		const logger = createLogger('@yutu-software-cli:command-handler');
 		if (!argv) {
 			throw new Error('\u53C2\u6570\u4E0D\u80FD\u4E3A\u7A7A');
 		}

@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
-import createLogger from '@amber-yutu-cli/debug-log';
-import exec from '@amber-yutu-cli/exec';
+import createLogger from '@yutu-software-cli/debug-log';
+import exec from '@yutu-software-cli/exec';
 import { pkg } from './cli';
 //实例化commander
 const program = new Command();
@@ -27,9 +27,9 @@ const registerCommand = () => {
 	program.on('option:debug', () => {
 		const debugOption = program.getOptionValue('debug');
 		process.env.DEBUG =
-			debugOption === true ? '@amber-yutu-cli:*' : debugOption;
+			debugOption === true ? '@yutu-software-cli:*' : debugOption;
 		// 在设置环境变量后再创建 logger
-		const logger = createLogger('@amber-yutu-cli:cli');
+		const logger = createLogger('@yutu-software-cli:cli');
 		logger.info('debug模式已开启');
 	});
 

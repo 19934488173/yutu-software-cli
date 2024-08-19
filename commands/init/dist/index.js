@@ -1,6 +1,6 @@
 // commands/init/src/initCommand.ts
-import CommandHandler from '@amber-yutu-cli/command-handler';
-import createLogger from '@amber-yutu-cli/debug-log';
+import CommandHandler from '@yutu-software-cli/command-handler';
+import createLogger from '@yutu-software-cli/debug-log';
 
 // commands/init/src/prepareStage.ts
 import inquirer2 from 'inquirer';
@@ -149,8 +149,8 @@ var prepareStage_default = prepareStage;
 // commands/init/src/templateHandler.ts
 import path from 'path';
 import userHome from 'user-home';
-import { sleep, spawnPlus, spinnerStart } from '@amber-yutu-cli/share-utils';
-import PackageHandler from '@amber-yutu-cli/package-handler';
+import { sleep, spawnPlus, spinnerStart } from '@yutu-software-cli/share-utils';
+import PackageHandler from '@yutu-software-cli/package-handler';
 var templateNpmInfo;
 var downloadTemplate = async (templateInfo, logger) => {
 	const targetPath = path.resolve(userHome, '.amber-yutu-cli', 'template');
@@ -276,7 +276,7 @@ var InitCommand = class extends CommandHandler {
 	logger;
 	//初始化命令参数
 	init() {
-		this.logger = createLogger('@amber-yutu-cli:init');
+		this.logger = createLogger('@yutu-software-cli:init');
 		this.projectName = this._argv[0] || '';
 		this.force = this._argv[1]?.force || false;
 		this.logger.log('projectName', this.projectName);

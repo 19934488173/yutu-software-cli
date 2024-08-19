@@ -1,6 +1,6 @@
 // models/package-handler/src/packageInstaller.ts
 import npminstall from 'npminstall';
-import { getDefaultRegistry } from '@amber-yutu-cli/get-npm-info';
+import { getDefaultRegistry } from '@yutu-software-cli/get-npm-info';
 var PackageInstaller = class {
 	static async installPackage(options) {
 		const { targetPath, storeDir, packageName, packageVersion } = options;

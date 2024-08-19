@@ -1,8 +1,8 @@
 import path from 'path';
 import userHome from 'user-home';
-import { sleep, spawnPlus, spinnerStart } from '@amber-yutu-cli/share-utils';
-import PackageHandler from '@amber-yutu-cli/package-handler';
-import createLogger from '@amber-yutu-cli/debug-log';
+import { sleep, spawnPlus, spinnerStart } from '@yutu-software-cli/share-utils';
+import PackageHandler from '@yutu-software-cli/package-handler';
+import createLogger from '@yutu-software-cli/debug-log';
 import {
 	IProjectInfo,
 	IProjectTemplate,

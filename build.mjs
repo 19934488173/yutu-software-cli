@@ -22,13 +22,13 @@ const excludeFiles = [
 	'inquirer',
 	'cli-spinner',
 	'user-home',
-	'@amber-yutu-cli/debug-log',
-	'@amber-yutu-cli/get-npm-info',
-	'@amber-yutu-cli/exec',
-	'@amber-yutu-cli/package-handler',
-	'@amber-yutu-cli/share-utils',
-	'@amber-yutu-cli/command-handler',
-	'@amber-yutu-cli/init'
+	'@yutu-software-cli/debug-log',
+	'@yutu-software-cli/get-npm-info',
+	'@yutu-software-cli/exec',
+	'@yutu-software-cli/package-handler',
+	'@yutu-software-cli/share-utils',
+	'@yutu-software-cli/command-handler',
+	'@yutu-software-cli/init'
 ];
 
 const __filename = fileURLToPath(import.meta.url);

@@ -1,5 +1,5 @@
 {
-	"name": "@amber-yutu-cli/package-handler",
+	"name": "@yutu-software-cli/package-handler",
 	"version": "1.5.0-alpha.0",
 	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
@@ -22,14 +22,14 @@
 		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
 	},
 	"scripts": {
-		"test": "node ./__tests__/@amber-yutu-cli/package-handler.test.js"
+		"test": "node ./__tests__/@yutu-software-cli/package-handler.test.js"
 	},
 	"bugs": {
 		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
 	},
 	"dependencies": {
-		"@amber-yutu-cli/get-npm-info": "^1.5.0-alpha.0",
-		"@amber-yutu-cli/share-utils": "^1.5.0-alpha.0",
+		"@yutu-software-cli/get-npm-info": "^1.5.0-alpha.0",
+		"@yutu-software-cli/share-utils": "^1.5.0-alpha.0",
 		"fs-extra": "^11.2.0",
 		"npminstall": "^7.12.0",
 		"path-exists": "^5.0.0",
@@ -38,5 +38,5 @@
 	"devDependencies": {
 		"@types/fs-extra": "^11.0.4"
 	},
-	"gitHead": "0134193aaf33cb83d8ec280da284e7c97a9efd4f"
+	"gitHead": "052addaf3d32a02df04cb17e29fd220d5e6c4fad"
 }

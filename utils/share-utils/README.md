@@ -1,11 +1,11 @@
-# `@amber-yutu-cli/share-utils`
+# `@yutu-software-cli/share-utils`
 
 > TODO: description
 
 ## Usage
 
 ```
-import shareUtils from '@amber-yutu-cli/share-utils';
+import shareUtils from '@yutu-software-cli/share-utils';
 
 // TODO: DEMONSTRATE API
 ```

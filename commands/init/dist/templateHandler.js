@@ -1,8 +1,8 @@
 // commands/init/src/templateHandler.ts
 import path from 'path';
 import userHome from 'user-home';
-import { sleep, spawnPlus, spinnerStart } from '@amber-yutu-cli/share-utils';
-import PackageHandler from '@amber-yutu-cli/package-handler';
+import { sleep, spawnPlus, spinnerStart } from '@yutu-software-cli/share-utils';
+import PackageHandler from '@yutu-software-cli/package-handler';
 
 // commands/init/src/types.ts
 var TEMPLATE_TYPE_NORMAL = 'normal';

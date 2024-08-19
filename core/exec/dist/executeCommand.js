@@ -1,5 +1,5 @@
 // core/exec/src/executeCommand.ts
-import { spawnPlus } from '@amber-yutu-cli/share-utils';
+import { spawnPlus } from '@yutu-software-cli/share-utils';
 var cleanCommandArgs = (args) => {
 	const cmd = args[args.length - 1];
 	const cleanedCmd = Object.keys(cmd).reduce((acc, key) => {

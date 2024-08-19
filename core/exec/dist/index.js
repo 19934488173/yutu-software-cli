@@ -1,13 +1,13 @@
 // core/exec/src/index.ts
-import createLogger from '@amber-yutu-cli/debug-log';
+import createLogger from '@yutu-software-cli/debug-log';
 
 // core/exec/src/getOrInstallPackage.ts
 import path from 'path';
-import PackageHandler from '@amber-yutu-cli/package-handler';
+import PackageHandler from '@yutu-software-cli/package-handler';
 
 // core/exec/src/constants.ts
 var SETTINGS = {
-	init: '@amber-yutu-cli/init'
+	init: '@yutu-software-cli/init'
 };
 var CACHE_DIR = 'dependencies';
 
@@ -43,7 +43,7 @@ var getOrInstallPackage = async (options) => {
 var getOrInstallPackage_default = getOrInstallPackage;
 
 // core/exec/src/executeCommand.ts
-import { spawnPlus } from '@amber-yutu-cli/share-utils';
+import { spawnPlus } from '@yutu-software-cli/share-utils';
 var cleanCommandArgs = (args) => {
 	const cmd = args[args.length - 1];
 	const cleanedCmd = Object.keys(cmd).reduce((acc, key) => {
@@ -83,7 +83,7 @@ var executeCommand_default = executeCommand;
 
 // core/exec/src/index.ts
 var exec = async (...args) => {
-	const logger = createLogger('@amber-yutu-cli:exec');
+	const logger = createLogger('@yutu-software-cli:exec');
 	let pkg;
 	const targetPath = process.env.CLI_TARGET_PATH ?? '';
 	const homePath = process.env.CLI_HOME_PATH ?? '';

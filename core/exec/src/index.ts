@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import createLogger from '@amber-yutu-cli/debug-log';
+import createLogger from '@yutu-software-cli/debug-log';
 
 import getOrInstallPackage from './getOrInstallPackage';
 import executeCommand from './executeCommand';
@@ -9,7 +9,7 @@ import { ExecArgs, PackageType } from './types';
 // 异步执行命令函数
 const exec = async (...args: ExecArgs) => {
 	// 命名日志空间为：exec
-	const logger = createLogger('@amber-yutu-cli:exec');
+	const logger = createLogger('@yutu-software-cli:exec');
 
 	let pkg: PackageType | undefined;
 

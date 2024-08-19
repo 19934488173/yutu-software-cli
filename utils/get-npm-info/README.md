@@ -1,11 +1,11 @@
-# `@amber-yutu-cli/get-npm-info`
+# `@yutu-software-cli/get-npm-info`
 
 > TODO: description
 
 ## Usage
 
 ```
-import getNpmInfo from '@amber-yutu-cli/get-npm-info';
+import getNpmInfo from '@yutu-software-cli/get-npm-info';
 
 // TODO: DEMONSTRATE API
 ```

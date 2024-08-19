@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { spawnPlus } from '@amber-yutu-cli/share-utils';
+import { spawnPlus } from '@yutu-software-cli/share-utils';
 
 import { IExecuteCommandOptions } from './types';
 

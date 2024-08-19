@@ -14,14 +14,14 @@
 		"baseUrl": ".",
 		"paths": {
 			"*": ["*", "*.js"],
-			"@amber-yutu-cli/share-utils": ["utils/share-utils/src/index.ts"],
-			"@amber-yutu-cli/debug-log": ["utils/debug-log/src/index.ts"],
-			"@amber-yutu-cli/get-npm-info": ["utils/get-npm-info/src/index.ts"],
-			"@amber-yutu-cli/exec": ["core/exec/src/index.ts"],
-			"@amber-yutu-cli/package-handler": [
+			"@yutu-software-cli/share-utils": ["utils/share-utils/src/index.ts"],
+			"@yutu-software-cli/debug-log": ["utils/debug-log/src/index.ts"],
+			"@yutu-software-cli/get-npm-info": ["utils/get-npm-info/src/index.ts"],
+			"@yutu-software-cli/exec": ["core/exec/src/index.ts"],
+			"@yutu-software-cli/package-handler": [
 				"models/package-handler/src/index.ts"
 			],
-			"@amber-yutu-cli/command-handler": [
+			"@yutu-software-cli/command-handler": [
 				"models/command-handler/src/index.ts"
 			],
 			"userhome": ["core/cli/types/userhome.d.ts"],

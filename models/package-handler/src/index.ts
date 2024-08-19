@@ -5,8 +5,8 @@ import {
 	isObject,
 	readPackageJson,
 	formatPath
-} from '@amber-yutu-cli/share-utils';
-import { getNpmLatestVersion } from '@amber-yutu-cli/get-npm-info';
+} from '@yutu-software-cli/share-utils';
+import { getNpmLatestVersion } from '@yutu-software-cli/get-npm-info';
 import CacheManager from './cacheManager';
 import PackageInstaller from './packageInstaller';
 

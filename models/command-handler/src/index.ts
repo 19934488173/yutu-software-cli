@@ -1,6 +1,6 @@
 import semver from 'semver';
 import chalk from 'chalk';
-import createLogger from '@amber-yutu-cli/debug-log';
+import createLogger from '@yutu-software-cli/debug-log';
 
 // 设置最低支持的Node.js版本号
 export const LOWEST_NODE_VERSION = '12.0.0';
@@ -13,7 +13,7 @@ abstract class CommandHandler {
 
 	constructor(argv: string[]) {
 		//注册日志空间
-		const logger = createLogger('@amber-yutu-cli:command-handler');
+		const logger = createLogger('@yutu-software-cli:command-handler');
 
 		// 检查参数是否为空
 		if (!argv) {

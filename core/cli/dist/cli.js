@@ -1,7 +1,7 @@
 // core/cli/src/cli.ts
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { readPackageJson } from '@amber-yutu-cli/share-utils';
+import { readPackageJson } from '@yutu-software-cli/share-utils';
 
 // core/cli/src/prepare.ts
 import rootCheck from 'root-check';
@@ -599,7 +599,7 @@ function pathExistsSync(path2) {
 }
 
 // core/cli/src/prepare.ts
-import getNpmSemverVersion from '@amber-yutu-cli/get-npm-info';
+import getNpmSemverVersion from '@yutu-software-cli/get-npm-info';
 var DEFAULT_CLI_HOME = '.amber-yutu-cli';
 var checkHomeDir = () => {
 	const homeDir = userhome();
@@ -631,8 +631,8 @@ var prepare_default = prepare;
 
 // core/cli/src/registerCommand.ts
 import { Command } from 'commander';
-import createLogger from '@amber-yutu-cli/debug-log';
-import exec from '@amber-yutu-cli/exec';
+import createLogger from '@yutu-software-cli/debug-log';
+import exec from '@yutu-software-cli/exec';
 var program = new Command();
 var registerCommand = () => {
 	program
@@ -656,8 +656,8 @@ var registerCommand = () => {
 	program.on('option:debug', () => {
 		const debugOption = program.getOptionValue('debug');
 		process.env.DEBUG =
-			debugOption === true ? '@amber-yutu-cli:*' : debugOption;
-		const logger = createLogger('@amber-yutu-cli:cli');
+			debugOption === true ? '@yutu-software-cli:*' : debugOption;
+		const logger = createLogger('@yutu-software-cli:cli');
 		logger.info('debug\u6A21\u5F0F\u5DF2\u5F00\u542F');
 	});
 	program.on('option:targetPath', () => {

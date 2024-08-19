@@ -1,11 +1,11 @@
-# `@amber-yutu-cli/debug-log`
+# `@yutu-software-cli/debug-log`
 
 > TODO: description
 
 ## Usage
 
 ```
-import debugLog from '@amber-yutu-cli/debug-log';
+import debugLog from '@yutu-software-cli/debug-log';
 
 // TODO: DEMONSTRATE API
 ```

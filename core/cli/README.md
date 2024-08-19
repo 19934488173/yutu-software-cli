@@ -1,11 +1,11 @@
-# `@amber-yutu-cli/cli`
+# `@yutu-software-cli/cli`
 
 > TODO: description
 
 ## Usage
 
 ```
-import cli from '@amber-yutu-cli/cli';
+import cli from '@yutu-software-cli/cli';
 
 // TODO: DEMONSTRATE API
 ```

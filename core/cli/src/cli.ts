@@ -1,6 +1,6 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { readPackageJson } from '@amber-yutu-cli/share-utils';
+import { readPackageJson } from '@yutu-software-cli/share-utils';
 import prepare from './prepare';
 import registerCommand from './registerCommand';
 

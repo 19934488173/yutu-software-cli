@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import semver from 'semver';
 import chalk from 'chalk';
 import { pathExistsSync } from 'path-exists';
-import getNpmSemverVersion from '@amber-yutu-cli/get-npm-info';
+import getNpmSemverVersion from '@yutu-software-cli/get-npm-info';
 
 import { pkg } from './cli';
 

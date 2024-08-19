@@ -1,11 +1,11 @@
-# `@amber-yutu-cli/command-handler`
+# `@yutu-software-cli/command-handler`
 
 > TODO: description
 
 ## Usage
 
 ```
-import commandHandler from '@amber-yutu-cli/command-handler';
+import commandHandler from '@yutu-software-cli/command-handler';
 
 // TODO: DEMONSTRATE API
 ```
