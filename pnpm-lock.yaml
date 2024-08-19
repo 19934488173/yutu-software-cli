@@ -55,16 +55,16 @@ importers:
   commands/init:
     dependencies:
       '@amber-yutu-cli/command-handler':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../models/command-handler
       '@amber-yutu-cli/debug-log':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/debug-log
       '@amber-yutu-cli/package-handler':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../models/package-handler
       '@amber-yutu-cli/share-utils':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/share-utils
       fs-extra:
         specifier: ^11.2.0
@@ -95,16 +95,16 @@ importers:
   core/cli:
     dependencies:
       '@amber-yutu-cli/debug-log':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/debug-log
       '@amber-yutu-cli/exec':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../exec
       '@amber-yutu-cli/get-npm-info':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/get-npm-info
       '@amber-yutu-cli/share-utils':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/share-utils
       chalk:
         specifier: ^5.3.0
@@ -141,13 +141,13 @@ importers:
   core/exec:
     dependencies:
       '@amber-yutu-cli/debug-log':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/debug-log
       '@amber-yutu-cli/package-handler':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../models/package-handler
       '@amber-yutu-cli/share-utils':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/share-utils
       commander:
         specifier: ^12.1.0
@@ -156,7 +156,7 @@ importers:
   models/command-handler:
     dependencies:
       '@amber-yutu-cli/debug-log':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/debug-log
       '@types/semver':
         specifier: ^7.5.8
@@ -171,10 +171,10 @@ importers:
   models/package-handler:
     dependencies:
       '@amber-yutu-cli/get-npm-info':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/get-npm-info
       '@amber-yutu-cli/share-utils':
-        specifier: ^1.4.0-alpha.0
+        specifier: ^1.5.0-alpha.0
         version: link:../../utils/share-utils
       fs-extra:
         specifier: ^11.2.0

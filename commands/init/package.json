@@ -1,6 +1,6 @@
 {
 	"name": "@amber-yutu-cli/init",
-	"version": "1.4.0-alpha.0",
+	"version": "1.5.0-alpha.0",
 	"description": "@amber-yutu-cli init",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/amber-yutu-cli#readme",
@@ -33,10 +33,10 @@
 		"@types/user-home": "^2.0.2"
 	},
 	"dependencies": {
-		"@amber-yutu-cli/command-handler": "^1.4.0-alpha.0",
-		"@amber-yutu-cli/debug-log": "^1.4.0-alpha.0",
-		"@amber-yutu-cli/package-handler": "^1.4.0-alpha.0",
-		"@amber-yutu-cli/share-utils": "^1.4.0-alpha.0",
+		"@amber-yutu-cli/command-handler": "^1.5.0-alpha.0",
+		"@amber-yutu-cli/debug-log": "^1.5.0-alpha.0",
+		"@amber-yutu-cli/package-handler": "^1.5.0-alpha.0",
+		"@amber-yutu-cli/share-utils": "^1.5.0-alpha.0",
 		"fs-extra": "^11.2.0",
 		"inquirer": "^10.1.8",
 		"semver": "^7.6.3",
