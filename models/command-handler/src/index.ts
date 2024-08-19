@@ -58,7 +58,7 @@ abstract class CommandHandler {
 		if (!semver.gte(currentVersion, LOWEST_NODE_VERSION)) {
 			throw new Error(
 				chalk.red(
-					`amber-yutu-cli 需要安装v${LOWEST_NODE_VERSION}以上版本的Node.js`
+					`yutu-software-cli 需要安装v${LOWEST_NODE_VERSION}以上版本的Node.js`
 				)
 			);
 		}

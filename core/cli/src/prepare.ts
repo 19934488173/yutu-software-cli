@@ -9,7 +9,7 @@ import getNpmSemverVersion from '@yutu-software-cli/get-npm-info';
 
 import { pkg } from './cli';
 
-const DEFAULT_CLI_HOME = '.amber-yutu-cli';
+const DEFAULT_CLI_HOME = '.yutu-software-cli';
 
 // 2，检查用户主目录
 const checkHomeDir = () => {

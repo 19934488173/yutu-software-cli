@@ -3,12 +3,12 @@
 	"version": "1.6.1",
 	"description": "@yutu-software-cli cli",
 	"author": "amberHe <1542588809@qq.com>",
-	"homepage": "https://github.com/19934488173/amber-yutu-cli#readme",
+	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
 	"license": "ISC",
 	"type": "module",
 	"main": "dist/index.js",
 	"bin": {
-		"amber-yutu-cli": "dist/index.js"
+		"yutu-software-cli": "dist/index.js"
 	},
 	"dependencies": {
 		"@yutu-software-cli/debug-log": "^1.6.1",
@@ -36,11 +36,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
+		"url": "git+https://github.com/19934488173/yutu-software-cli.git"
 	},
 	"scripts": {},
 	"bugs": {
-		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
+		"url": "https://github.com/19934488173/yutu-software-cli/issues"
 	},
 	"exports": {
 		".": "./dist/index.js",

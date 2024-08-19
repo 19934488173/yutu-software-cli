@@ -3,7 +3,7 @@
 	"version": "1.6.1",
 	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
-	"homepage": "https://github.com/19934488173/amber-yutu-cli#readme",
+	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
 	"license": "ISC",
 	"type": "module",
 	"main": "dist/index.js",
@@ -19,13 +19,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
+		"url": "git+https://github.com/19934488173/yutu-software-cli.git"
 	},
 	"scripts": {
 		"test": "node ./__tests__/@yutu-software-cli/command-handler.test.js"
 	},
 	"bugs": {
-		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
+		"url": "https://github.com/19934488173/yutu-software-cli/issues"
 	},
 	"dependencies": {
 		"@types/semver": "^7.5.8",

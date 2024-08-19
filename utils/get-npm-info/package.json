@@ -3,7 +3,7 @@
 	"version": "1.6.1",
 	"description": "@yutu-software-cli get-npm-info",
 	"author": "amberHe <1542588809@qq.com>",
-	"homepage": "https://github.com/19934488173/amber-yutu-cli#readme",
+	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
 	"license": "ISC",
 	"main": "dist/index.js",
 	"directories": {
@@ -18,14 +18,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/19934488173/amber-yutu-cli.git"
+		"url": "git+https://github.com/19934488173/yutu-software-cli.git"
 	},
 	"scripts": {
 		"test": "node ./__tests__/@yutu-software-cli/get-npm-info.test.js"
 	},
 	"type": "module",
 	"bugs": {
-		"url": "https://github.com/19934488173/amber-yutu-cli/issues"
+		"url": "https://github.com/19934488173/yutu-software-cli/issues"
 	},
 	"dependencies": {
 		"axios": "^1.7.4",

@@ -20,10 +20,10 @@ export const downloadTemplate = async (
 	logger: ReturnType<typeof createLogger>
 ) => {
 	// 设置模板存储路径和 node_modules 目录路径
-	const targetPath = path.resolve(userHome, '.amber-yutu-cli', 'template');
+	const targetPath = path.resolve(userHome, '.yutu-software-cli', 'template');
 	const storeDir = path.resolve(
 		userHome,
-		'.amber-yutu-cli',
+		'.yutu-software-cli',
 		'template',
 		'node_modules'
 	);

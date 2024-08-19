@@ -1,5 +1,5 @@
 {
-	"name": "amber-yutu-cli",
+	"name": "yutu-software-cli",
 	"version": "1.0.0",
 	"description": "",
 	"type": "module",
@@ -8,7 +8,7 @@
 	"license": "ISC",
 	"scripts": {
 		"build": "node build.mjs",
-		"dev": "nodemon --watch core  -e ts --exec \"pnpm run build && node core/cli/dist/index.js init amber -tp /Users/amber/Documents/amber-git/amber-yutu-cli/commands/init -d @yutu-software-cli:init\""
+		"dev": "nodemon --watch core  -e ts --exec \"pnpm run build && node core/cli/dist/index.js init amber -tp /Users/amber/Documents/amber-git/yutu-software-cli/commands/init -d @yutu-software-cli:init\""
 	},
 	"devDependencies": {
 		"@types/node": "^22.2.0",
