@@ -14,7 +14,7 @@
 		"dist"
 	],
 	"publishConfig": {
-		"registry": "https://registry.npmmirror.com"
+		"access": "public"
 	},
 	"repository": {
 		"type": "git",
@@ -36,5 +36,5 @@
 		"@types/semver": "^7.5.8",
 		"@types/url-join": "^4.0.3"
 	},
-	"gitHead": "960eae4bf04212b767d356d66a70c5ed62ba9afe"
+	"gitHead": "0134193aaf33cb83d8ec280da284e7c97a9efd4f"
 }
