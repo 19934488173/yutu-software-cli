@@ -57,13 +57,14 @@ var cacheManager_default = CacheManager;
 // models/package-handler/src/packageInstaller.ts
 import npminstall from "npminstall";
 import { getDefaultRegistry } from "@yutu-software-cli/get-npm-info";
-var PackageInstaller = class {
-  static async installPackage(options) {
-    const { targetPath, storeDir, packageName, packageVersion } = options;
-    return npminstall({
+var packageInstaller = async (options) => {
+  const { targetPath, storeDir, packageName, packageVersion, registry } = options;
+  const installRegistry = registry || getDefaultRegistry();
+  try {
+    await npminstall({
       root: targetPath,
       storeDir,
-      registry: getDefaultRegistry(),
+      registry: installRegistry,
       pkgs: [
         {
           name: packageName,
@@ -71,9 +72,12 @@ var PackageInstaller = class {
         }
       ]
     });
+  } catch (error) {
+    console.error(`Failed to install ${packageName}@${packageVersion}:`, error);
+    throw error;
   }
 };
-var packageInstaller_default = PackageInstaller;
+var packageInstaller_default = packageInstaller;
 
 // models/package-handler/src/index.ts
 var PackageHandler = class {
@@ -125,7 +129,7 @@ var PackageHandler = class {
   /** 安装当前包 */
   async install() {
     await this.prepare();
-    await packageInstaller_default.installPackage({
+    await packageInstaller_default({
       targetPath: this.targetPath,
       storeDir: this.storeDir,
       packageName: this.packageName,
@@ -137,7 +141,7 @@ var PackageHandler = class {
     await this.prepare();
     const latestPackageVersion = await getNpmLatestVersion(this.packageName) ?? "";
     if (this.cacheManager && !this.cacheManager.cacheExists(latestPackageVersion)) {
-      await packageInstaller_default.installPackage({
+      await packageInstaller_default({
         targetPath: this.targetPath,
         storeDir: this.storeDir,
         packageName: this.packageName,

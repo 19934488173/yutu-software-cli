@@ -6,10 +6,12 @@ const getProjectTemplate = (): IProjectTemplate[] => {
 	// return await request({ url: '/project/template' });
 	return [
 		{
-			name: 'React 项目模板',
+			name: 'React项目模板',
 			version: '1.0.2',
-			npmName: 'imooc-cli-dev-template-vue2',
-			type: 'normal'
+			npmName: 'yutu-software-template-react',
+			type: 'normal',
+			installCommand: 'pnpm install',
+			startCommand: 'pnpm run dev'
 		}
 	];
 };

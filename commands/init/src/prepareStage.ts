@@ -4,6 +4,18 @@ import getProjectTemplate from './projectTemplate';
 import { IPrepareOptions } from './types';
 import getProjectInfo from './projectInfoHandler';
 
+// 提取询问确认的通用函数
+const askConfirmation = async (message: string) => {
+	const question: any = {
+		type: 'confirm',
+		name: 'confirmation',
+		default: false,
+		message
+	};
+	const { confirmation } = await inquirer.prompt([question]);
+	return confirmation;
+};
+
 //准备阶段逻辑
 const prepareStage = async (options: IPrepareOptions) => {
 	const { projectName, force } = options;
@@ -11,43 +23,34 @@ const prepareStage = async (options: IPrepareOptions) => {
 	if (!template || template.length === 0) throw new Error('项目模板不存在');
 
 	// 获取当前执行路径
-	const localPath = process.cwd();
+	const currentPath = process.cwd();
 
 	// 检查当前目录是否为空
-	if (!isDirEmpty(localPath)) {
-		// 是否继续的标志
-		let ifContinue = false;
-		// 如果不强制执行，询问用户是否继续
+	if (!isDirEmpty(currentPath)) {
 		if (!force) {
-			const confirmQuestion: any = {
-				type: 'confirm',
-				name: 'ifContinue',
-				default: false,
-				message: '当前文件夹不为空，是否继续创建项目？'
-			};
-			const response = await inquirer.prompt([confirmQuestion]);
-			ifContinue = response.ifContinue;
-
+			const ifContinue =
+				await askConfirmation('当前文件夹不为空，是否继续创建项目？');
 			if (!ifContinue) return null;
 		}
 
 		// 如果用户选择继续或者强制执行
-		if (!ifContinue || force) {
-			// 询问用户是否确认清空当前目录下的文件
-			const confirmDeleteQuestion: any = {
-				type: 'confirm',
-				name: 'confirmDelete',
-				default: false,
-				message: '是否确认清空当前目录下的文件？'
-			};
-			const { confirmDelete } = await inquirer.prompt([confirmDeleteQuestion]);
-			// 如果用户确认删除，清空当前目录
-			if (confirmDelete) {
-				emptyDirSync(localPath);
+		const confirmDelete =
+			await askConfirmation('是否确认清空当前目录下的文件？');
+		if (confirmDelete) {
+			try {
+				emptyDirSync(currentPath);
+			} catch (error: any) {
+				throw new Error(`清空目录失败: ${error.message}`);
 			}
 		}
 	}
-	return await getProjectInfo(projectName);
+
+	// 获取项目信息
+	try {
+		return await getProjectInfo(projectName);
+	} catch (error: any) {
+		throw new Error(`获取项目信息失败: ${error.message}`);
+	}
 };
 
 export default prepareStage;

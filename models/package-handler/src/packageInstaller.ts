@@ -1,19 +1,28 @@
 import npminstall from 'npminstall';
 import { getDefaultRegistry } from '@yutu-software-cli/get-npm-info';
 
-/**
- * PackageInstaller类负责处理package的安装逻辑。
- * 通过封装npminstall库，简化package的安装过程。
- */
-class PackageInstaller {
-	static async installPackage(options: InstallOptions) {
-		const { targetPath, storeDir, packageName, packageVersion } = options;
+interface InstallOptions {
+	targetPath: string;
+	storeDir?: string;
+	packageName: string;
+	packageVersion: string;
+	registry?: string;
+}
 
-		// 调用npminstall方法安装package
-		return npminstall({
+/** 通过 npminstall 库封装了安装逻辑 */
+const packageInstaller = async (options: InstallOptions) => {
+	const { targetPath, storeDir, packageName, packageVersion, registry } =
+		options;
+
+	// 如果没有指定 registry，默认使用 getDefaultRegistry()
+	const installRegistry = registry || getDefaultRegistry();
+
+	try {
+		// 使用 npminstall 安装包
+		await npminstall({
 			root: targetPath,
 			storeDir: storeDir,
-			registry: getDefaultRegistry(),
+			registry: installRegistry,
 			pkgs: [
 				{
 					name: packageName,
@@ -21,7 +30,10 @@ class PackageInstaller {
 				}
 			]
 		});
+	} catch (error) {
+		console.error(`Failed to install ${packageName}@${packageVersion}:`, error);
+		throw error;
 	}
-}
+};
 
-export default PackageInstaller;
+export default packageInstaller;

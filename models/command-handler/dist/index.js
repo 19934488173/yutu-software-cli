@@ -496,7 +496,6 @@ var LOWEST_NODE_VERSION = "12.0.0";
 var CommandHandler = class {
   _argv;
   _cmd;
-  runner;
   constructor(argv) {
     const logger = createLogger("@yutu-software-cli:command-handler");
     if (!argv) {
@@ -509,7 +508,7 @@ var CommandHandler = class {
       throw new Error("\u53C2\u6570\u5217\u8868\u4E3A\u7A7A\uFF01");
     }
     this._argv = argv;
-    const runner = new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
       let chain = Promise.resolve();
       chain = chain.then(() => this.checkNodeVersion());
       chain = chain.then(() => this.initArgs());
@@ -520,7 +519,6 @@ var CommandHandler = class {
         reject(err);
       });
     });
-    this.runner = runner;
   }
   // 检查Node.js版本号是否满足最低要求
   checkNodeVersion() {

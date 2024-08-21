@@ -2,10 +2,12 @@
 var getProjectTemplate = () => {
   return [
     {
-      name: "React \u9879\u76EE\u6A21\u677F",
+      name: "React\u9879\u76EE\u6A21\u677F",
       version: "1.0.2",
-      npmName: "imooc-cli-dev-template-vue2",
-      type: "normal"
+      npmName: "yutu-software-template-react",
+      type: "normal",
+      installCommand: "pnpm install",
+      startCommand: "pnpm run dev"
     }
   ];
 };

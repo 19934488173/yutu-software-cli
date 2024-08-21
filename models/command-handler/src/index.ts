@@ -9,7 +9,6 @@ export const LOWEST_NODE_VERSION = '12.0.0';
 abstract class CommandHandler {
 	protected _argv: any[];
 	protected _cmd!: any;
-	private runner: Promise<void>;
 
 	constructor(argv: string[]) {
 		//注册日志空间
@@ -33,7 +32,7 @@ abstract class CommandHandler {
 		this._argv = argv;
 
 		// 初始化Promise链，确保命令执行流程顺序
-		const runner = new Promise<void>((resolve, reject) => {
+		new Promise<void>((resolve, reject) => {
 			let chain = Promise.resolve();
 			chain = chain.then(() => this.checkNodeVersion());
 			chain = chain.then(() => this.initArgs());
@@ -45,9 +44,6 @@ abstract class CommandHandler {
 				reject(err);
 			});
 		});
-
-		// 将runner存储为实例属性，方便后续使用
-		this.runner = runner;
 	}
 
 	// 检查Node.js版本号是否满足最低要求

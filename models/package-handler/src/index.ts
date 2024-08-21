@@ -8,7 +8,7 @@ import {
 } from '@yutu-software-cli/share-utils';
 import { getNpmLatestVersion } from '@yutu-software-cli/get-npm-info';
 import CacheManager from './cacheManager';
-import PackageInstaller from './packageInstaller';
+import packageInstaller from './packageInstaller';
 
 /** Package类封装了npm包的管理逻辑，包括安装、更新、判断是否存在等功能 */
 class PackageHandler {
@@ -67,7 +67,7 @@ class PackageHandler {
 	/** 安装当前包 */
 	async install() {
 		await this.prepare();
-		await PackageInstaller.installPackage({
+		await packageInstaller({
 			targetPath: this.targetPath,
 			storeDir: this.storeDir,
 			packageName: this.packageName,
@@ -84,7 +84,7 @@ class PackageHandler {
 			this.cacheManager &&
 			!this.cacheManager.cacheExists(latestPackageVersion)
 		) {
-			await PackageInstaller.installPackage({
+			await packageInstaller({
 				targetPath: this.targetPath,
 				storeDir: this.storeDir,
 				packageName: this.packageName,
