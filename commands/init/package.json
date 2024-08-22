@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/init",
-	"version": "1.6.2",
+	"version": "1.6.5",
 	"description": "@yutu-software-cli init",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -34,9 +34,9 @@
 		"@types/user-home": "^2.0.2"
 	},
 	"dependencies": {
-		"@yutu-software-cli/command-handler": "^1.6.2",
-		"@yutu-software-cli/debug-log": "^1.6.2",
-		"@yutu-software-cli/package-handler": "^1.6.2",
+		"@yutu-software-cli/command-handler": "^1.6.5",
+		"@yutu-software-cli/debug-log": "^1.6.5",
+		"@yutu-software-cli/package-handler": "^1.6.5",
 		"@yutu-software-cli/share-utils": "^1.6.2",
 		"ejs": "^3.1.10",
 		"fs-extra": "^11.2.0",
