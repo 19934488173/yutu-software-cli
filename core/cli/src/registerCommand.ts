@@ -8,7 +8,6 @@ const program = new Command();
 
 // 脚手架命令注册
 const registerCommand = () => {
-	// 检查node版本
 	program
 		.name(Object.keys(pkg.bin)[0])
 		.version(pkg.version)

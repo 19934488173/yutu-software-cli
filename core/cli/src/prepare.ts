@@ -9,6 +9,7 @@ import getNpmSemverVersion from '@yutu-software-cli/get-npm-info';
 
 import { pkg } from './cli';
 
+// 环境变量默认值，防止用户没有.env文件读不到值代码报错
 const DEFAULT_CLI_HOME = '.yutu-software-cli';
 
 // 2，检查用户主目录

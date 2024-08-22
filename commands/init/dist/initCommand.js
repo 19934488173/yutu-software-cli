@@ -322,33 +322,35 @@ var TemplateInstaller = class {
       await this.execCommand(installCommand, "\u4F9D\u8D56\u5B89\u88C5\u5931\u8D25\uFF01");
     }
     if (startCommand) {
-      setTimeout(() => {
-        this.execCommand(startCommand, "\u542F\u52A8\u6267\u884C\u547D\u4EE4\u5931\u8D25\uFF01");
-      }, 5e3);
+      await this.execCommand(startCommand, "\u542F\u52A8\u6267\u884C\u547D\u4EE4\u5931\u8D25\uFF01");
     }
   }
   /** 执行命令行命令 */
   async execCommand(command, errMsg) {
-    let ret;
-    if (command) {
-      const cmdArray = command.split(" ");
-      const cmd = WHITE_COMMAND.includes(cmdArray[0]) ? cmdArray[0] : null;
-      if (!cmd) {
-        throw new Error("\u547D\u4EE4\u4E0D\u5B58\u5728\uFF01\u547D\u4EE4\uFF1A" + command);
-      }
-      const args = cmdArray.slice(1);
-      try {
-        console.log("cmd", cmd);
-        ret = await spawnPlus(cmd, args, {
-          stdio: "inherit",
-          cwd: process.cwd()
-        });
-        console.log("ret", ret);
-      } catch (error) {
-        throw new Error(`${errMsg}\uFF1A${error.message}`);
-      }
+    if (!command) return;
+    const cmdArray = command.split(" ");
+    const cmd = WHITE_COMMAND.includes(cmdArray[0]) ? cmdArray[0] : null;
+    if (!cmd) {
+      throw new Error("\u547D\u4EE4\u4E0D\u5B58\u5728\uFF01\u547D\u4EE4\uFF1A" + command);
     }
-    return ret;
+    const args = cmdArray.slice(1);
+    return new Promise((resolve, reject) => {
+      const child = spawnPlus(cmd, args, {
+        stdio: "inherit",
+        cwd: process.cwd()
+      });
+      child.on("error", (err) => {
+        console.error(`\u5B50\u8FDB\u7A0B\u9519\u8BEF: ${err}`);
+        reject(new Error(errMsg));
+      });
+      child.on("close", (code) => {
+        if (code === 0) {
+          resolve();
+        } else {
+          reject(new Error(`${errMsg} \u9000\u51FA\u7801: ${code}`));
+        }
+      });
+    });
   }
 };
 var templateInstaller_default = TemplateInstaller;

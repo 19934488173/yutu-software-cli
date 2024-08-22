@@ -197,43 +197,40 @@ class TemplateInstaller {
 
 		// 5. 执行启动命令
 		if (startCommand) {
-			setTimeout(() => {
-				this.execCommand(startCommand, '启动执行命令失败！');
-			}, 5000);
+			await this.execCommand(startCommand, '启动执行命令失败！');
 		}
 	}
 
 	/** 执行命令行命令 */
 	private async execCommand(command: string, errMsg: string) {
-		let ret: any;
-		if (command) {
-			const cmdArray = command.split(' ');
-			const cmd = WHITE_COMMAND.includes(cmdArray[0]) ? cmdArray[0] : null;
-			if (!cmd) {
-				throw new Error('命令不存在！命令：' + command);
-			}
-			const args = cmdArray.slice(1);
+		if (!command) return;
 
-			try {
-				console.log('cmd', cmd);
-				// 使用 await 等待 spawnPlus 执行完成
-				ret = await spawnPlus(cmd, args, {
-					stdio: 'inherit',
-					cwd: process.cwd()
-				});
-				console.log('ret', ret);
-				// if (ret.error) {
-				// 	throw ret.error;
-				// }
-				// if (ret.status !== 0) {
-				// 	throw new Error(`${errMsg}: ${ret.stderr?.toString()}`);
-				// }
-			} catch (error: any) {
-				// 捕获命令执行中的异常，并抛出错误信息
-				throw new Error(`${errMsg}：${error.message}`);
-			}
+		const cmdArray = command.split(' ');
+		const cmd = WHITE_COMMAND.includes(cmdArray[0]) ? cmdArray[0] : null;
+		if (!cmd) {
+			throw new Error('命令不存在！命令：' + command);
 		}
-		return ret;
+		const args = cmdArray.slice(1);
+
+		return new Promise<void>((resolve, reject) => {
+			const child = spawnPlus(cmd, args, {
+				stdio: 'inherit',
+				cwd: process.cwd()
+			});
+
+			child.on('error', (err) => {
+				console.error(`子进程错误: ${err}`);
+				reject(new Error(errMsg));
+			});
+
+			child.on('close', (code) => {
+				if (code === 0) {
+					resolve();
+				} else {
+					reject(new Error(`${errMsg} 退出码: ${code}`));
+				}
+			});
+		});
 	}
 }
 

@@ -1,3 +1,4 @@
+// import chokidar from 'chokidar';
 import { build } from 'esbuild';
 import fs from 'fs';
 import path from 'path';
@@ -48,16 +49,16 @@ const packages = [
 	path.join(__dirname, 'utils/get-npm-info')
 ];
 
-function hashFile(filePath) {
+const hashFile = (filePath) => {
 	const fileBuffer = fs.readFileSync(filePath);
 	const hashSum = crypto.createHash('sha256');
 	hashSum.update(fileBuffer);
 	return hashSum.digest('hex');
-}
+};
 
 const fileHashes = new Map();
 
-function compilePackage(filePath, pkgPath) {
+const compilePackage = (filePath, pkgPath) => {
 	const relativePath = path.relative(path.join(pkgPath, 'src'), filePath);
 	const outPath = path.join(
 		pkgPath,
@@ -91,7 +92,7 @@ function compilePackage(filePath, pkgPath) {
 	} else {
 		console.log(`Skipped ${filePath}, no changes detected.`);
 	}
-}
+};
 
 // 初始编译：对所有文件进行编译
 packages.forEach((pkgPath) => {
@@ -107,14 +108,14 @@ packages.forEach((pkgPath) => {
 	}
 });
 
-// function handleFileChange(filePath) {
+// const handleFileChange = (filePath) => {
 // 	const pkgPath = packages.find((p) => filePath.startsWith(p));
 // 	if (pkgPath) {
 // 		compilePackage(filePath, pkgPath);
 // 	}
-// }
+// };
 
-// 监听文件变化并触发重新编译
+// // 监听文件变化并触发重新编译
 // const watcher = chokidar.watch(
 // 	packages.map((pkgPath) => path.join(pkgPath, 'src/**/*.{ts,js}'))
 // );
