@@ -1,5 +1,5 @@
 import rootCheck from 'root-check';
-import userhome from 'userhome';
+import userHome from 'user-home';
 import path from 'path';
 import dotenv from 'dotenv';
 import semver from 'semver';
@@ -14,8 +14,7 @@ const DEFAULT_CLI_HOME = '.yutu-software-cli';
 
 // 2，检查用户主目录
 const checkHomeDir = () => {
-	const homeDir = userhome();
-	if (!homeDir || !pathExistsSync(homeDir)) {
+	if (!userHome || !pathExistsSync(userHome)) {
 		throw new Error('无法获取用户主目录');
 	}
 };
@@ -26,12 +25,11 @@ interface CLIConfig {
 	cliHome: string;
 }
 const checkEnv = () => {
-	const homeDir = userhome();
 	const cliConfig: CLIConfig = {
-		home: homeDir,
+		home: userHome,
 		cliHome: ''
 	};
-	const dotenvPath = path.resolve(homeDir, '.env');
+	const dotenvPath = path.resolve(userHome, '.env');
 
 	// 如果 .env 文件存在，则加载环境变量
 	if (pathExistsSync(dotenvPath)) {
@@ -40,8 +38,8 @@ const checkEnv = () => {
 
 	// 根据环境变量 CLI_HOME 设置 cliHome，否则使用默认值
 	cliConfig.cliHome = process.env.CLI_HOME
-		? path.join(homeDir, process.env.CLI_HOME)
-		: path.join(homeDir, DEFAULT_CLI_HOME);
+		? path.join(userHome, process.env.CLI_HOME)
+		: path.join(userHome, DEFAULT_CLI_HOME);
 
 	// 将 CLI_HOME_PATH 设置为环境变量
 	process.env.CLI_HOME_PATH = cliConfig.cliHome;

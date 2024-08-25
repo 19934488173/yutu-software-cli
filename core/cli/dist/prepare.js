@@ -1,6 +1,6 @@
 // core/cli/src/prepare.ts
 import rootCheck from "root-check";
-import userhome from "userhome";
+import userHome from "user-home";
 import path from "path";
 import dotenv from "dotenv";
 import semver from "semver";
@@ -31,22 +31,20 @@ var program = new Command();
 // core/cli/src/prepare.ts
 var DEFAULT_CLI_HOME = ".yutu-software-cli";
 var checkHomeDir = () => {
-  const homeDir = userhome();
-  if (!homeDir || !pathExistsSync(homeDir)) {
+  if (!userHome || !pathExistsSync(userHome)) {
     throw new Error("\u65E0\u6CD5\u83B7\u53D6\u7528\u6237\u4E3B\u76EE\u5F55");
   }
 };
 var checkEnv = () => {
-  const homeDir = userhome();
   const cliConfig = {
-    home: homeDir,
+    home: userHome,
     cliHome: ""
   };
-  const dotenvPath = path.resolve(homeDir, ".env");
+  const dotenvPath = path.resolve(userHome, ".env");
   if (pathExistsSync(dotenvPath)) {
     dotenv.config({ path: dotenvPath });
   }
-  cliConfig.cliHome = process.env.CLI_HOME ? path.join(homeDir, process.env.CLI_HOME) : path.join(homeDir, DEFAULT_CLI_HOME);
+  cliConfig.cliHome = process.env.CLI_HOME ? path.join(userHome, process.env.CLI_HOME) : path.join(userHome, DEFAULT_CLI_HOME);
   process.env.CLI_HOME_PATH = cliConfig.cliHome;
 };
 var prepare = async () => {

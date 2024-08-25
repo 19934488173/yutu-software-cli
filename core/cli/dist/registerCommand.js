@@ -499,7 +499,7 @@ import { readPackageJson } from "@yutu-software-cli/share-utils";
 
 // core/cli/src/prepare.ts
 import rootCheck from "root-check";
-import userhome from "userhome";
+import userHome from "user-home";
 import dotenv from "dotenv";
 import semver from "semver";
 import getNpmSemverVersion from "@yutu-software-cli/get-npm-info";
