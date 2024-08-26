@@ -24,7 +24,9 @@
 			"@yutu-software-cli/command-handler": [
 				"models/command-handler/src/index.ts"
 			],
-			"userhome": ["core/cli/types/userhome.d.ts"],
+			"@yutu-software-cli/template-installer": [
+				"utils/template-installer/src/index.ts"
+			],
 			"npminstall": ["models/package-handler/types/npminstall.d.ts"]
 		},
 		"outDir": "./dist"

@@ -12,11 +12,9 @@ const excludeFiles = [
 	'import-local',
 	'debug',
 	'root-check',
-	'userhome',
 	'dotenv',
 	'url-join',
 	'semver',
-	'axios',
 	'npminstall',
 	'pkg-dir',
 	'fs-extra',
@@ -26,13 +24,16 @@ const excludeFiles = [
 	'p-limit',
 	'ejs',
 	'glob',
+	'axios',
 	'@yutu-software-cli/debug-log',
 	'@yutu-software-cli/get-npm-info',
 	'@yutu-software-cli/exec',
 	'@yutu-software-cli/package-handler',
 	'@yutu-software-cli/share-utils',
 	'@yutu-software-cli/command-handler',
-	'@yutu-software-cli/init'
+	'@yutu-software-cli/init',
+	'@yutu-software-cli/add',
+	'@yutu-software-cli/template-installer'
 ];
 
 const __filename = fileURLToPath(import.meta.url);
@@ -44,9 +45,11 @@ const packages = [
 	path.join(__dirname, 'models/package-handler'),
 	path.join(__dirname, 'models/command-handler'),
 	path.join(__dirname, 'commands/init'),
+	path.join(__dirname, 'commands/add'),
 	path.join(__dirname, 'utils/share-utils'),
 	path.join(__dirname, 'utils/debug-log'),
-	path.join(__dirname, 'utils/get-npm-info')
+	path.join(__dirname, 'utils/get-npm-info'),
+	path.join(__dirname, 'utils/template-installer')
 ];
 
 const hashFile = (filePath) => {

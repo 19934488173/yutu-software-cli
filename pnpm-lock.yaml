@@ -51,7 +51,39 @@ importers:
         specifier: ^5.5.4
         version: 5.5.4
 
-  commands/add: {}
+  commands/add:
+    dependencies:
+      '@yutu-software-cli/command-handler':
+        specifier: workspace:*
+        version: link:../../models/command-handler
+      '@yutu-software-cli/debug-log':
+        specifier: workspace:*
+        version: link:../../utils/debug-log
+      '@yutu-software-cli/package-handler':
+        specifier: workspace:*
+        version: link:../../models/package-handler
+      '@yutu-software-cli/share-utils':
+        specifier: workspace:*
+        version: link:../../utils/share-utils
+      '@yutu-software-cli/template-installer':
+        specifier: workspace:*
+        version: link:../../utils/template-installer
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.2.0
+      inquirer:
+        specifier: ^10.1.8
+        version: 10.1.8
+      user-home:
+        specifier: ^3.0.0
+        version: 3.0.0
+    devDependencies:
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+      '@types/user-home':
+        specifier: ^2.0.2
+        version: 2.0.2
 
   commands/init:
     dependencies:
@@ -249,6 +281,18 @@ importers:
       '@types/cli-spinner':
         specifier: ^0.2.3
         version: 0.2.3
+
+  utils/template-installer:
+    dependencies:
+      '@yutu-software-cli/debug-log':
+        specifier: workspace:*
+        version: link:../debug-log
+      '@yutu-software-cli/package-handler':
+        specifier: workspace:*
+        version: link:../../models/package-handler
+      '@yutu-software-cli/share-utils':
+        specifier: workspace:*
+        version: link:../share-utils
 
 packages:
 

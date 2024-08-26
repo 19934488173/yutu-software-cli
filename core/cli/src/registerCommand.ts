@@ -21,6 +21,11 @@ const registerCommand = () => {
 		.command('init <projectName>')
 		.option('-f, --force', '强制初始化项目')
 		.action(exec);
+	// 2,创建组件
+	program
+		.command('add <templateName>')
+		.option('-f, --force', '强制插入模版')
+		.action(exec);
 
 	//监听debug参数
 	program.on('option:debug', () => {

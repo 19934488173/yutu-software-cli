@@ -57,13 +57,12 @@ var TemplateInstaller = class {
   }
   /** 下载或更新项目模板 */
   async download() {
-    const targetPath = path2.resolve(userHome, ".yutu-software-cli", "template");
-    const storeDir = path2.resolve(
+    const targetPath = path2.resolve(
       userHome,
-      ".yutu-software-cli",
-      "template",
-      "node_modules"
+      process.env.CLI_HOME_PATH ?? "",
+      "template"
     );
+    const storeDir = path2.resolve(targetPath, "node_modules");
     const { npmName, version } = this.projectInfo.projectTemplate;
     const templateNpm = new PackageHandler({
       targetPath,
@@ -137,7 +136,7 @@ var TemplateInstaller = class {
   }
   /** 安装 normal 类型模板 */
   async installNormal() {
-    const { npmName, ignore, installCommand, startCommand } = this.projectInfo.projectTemplate;
+    const { ignore, installCommand, startCommand } = this.projectInfo.projectTemplate;
     if (!this.templateNpmInfo) {
       throw new Error("\u6A21\u677F\u4FE1\u606F\u4E0D\u5B58\u5728\uFF0C\u8BF7\u5148\u4E0B\u8F7D\u6A21\u677F\uFF01");
     }

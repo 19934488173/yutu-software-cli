@@ -5,8 +5,21 @@
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
 	"license": "ISC",
-	"main": "dist/add.js",
-	"module": "dist/add.module.js",
+	"main": "dist/index.js",
+	"devDependencies": {
+		"@types/user-home": "^2.0.2",
+		"@types/fs-extra": "^11.0.4"
+	},
+	"dependencies": {
+		"@yutu-software-cli/command-handler": "workspace:*",
+		"@yutu-software-cli/debug-log": "workspace:*",
+		"@yutu-software-cli/package-handler": "workspace:*",
+		"@yutu-software-cli/share-utils": "workspace:*",
+		"@yutu-software-cli/template-installer": "workspace:*",
+		"inquirer": "^10.1.8",
+		"user-home": "^3.0.0",
+		"fs-extra": "^11.2.0"
+	},
 	"directories": {
 		"lib": "dist",
 		"test": "__tests__"

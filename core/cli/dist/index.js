@@ -551,6 +551,7 @@ var program = new Command();
 var registerCommand = () => {
   program.name(Object.keys(pkg.bin)[0]).version(pkg.version).usage("<command> [options]").option("-d, --debug [namespace]", "\u5F00\u542F\u8C03\u8BD5\u6A21\u5F0F", false).option("-tp, --targetPath <targetPath>", "\u6307\u5B9A\u672C\u5730\u8C03\u8BD5\u6587\u4EF6\u76EE\u6807\u8DEF\u5F84", "");
   program.command("init <projectName>").option("-f, --force", "\u5F3A\u5236\u521D\u59CB\u5316\u9879\u76EE").action(exec);
+  program.command("add <templateName>").option("-f, --force", "\u5F3A\u5236\u63D2\u5165\u6A21\u7248").action(exec);
   program.on("option:debug", () => {
     const debugOption = program.getOptionValue("debug");
     process.env.DEBUG = debugOption === true ? "@yutu-software-cli:*" : debugOption;

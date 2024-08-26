@@ -32,13 +32,12 @@ class TemplateInstaller {
 	/** 下载或更新项目模板 */
 	async download() {
 		// 设置模板存储路径和 node_modules 目录路径
-		const targetPath = path.resolve(userHome, '.yutu-software-cli', 'template');
-		const storeDir = path.resolve(
+		const targetPath = path.resolve(
 			userHome,
-			'.yutu-software-cli',
-			'template',
-			'node_modules'
+			process.env.CLI_HOME_PATH ?? '',
+			'template'
 		);
+		const storeDir = path.resolve(targetPath, 'node_modules');
 
 		// 从模板信息中解构获取 npm 包名和版本号
 		const { npmName, version } = this.projectInfo.projectTemplate;
@@ -149,7 +148,7 @@ class TemplateInstaller {
 
 	/** 安装 normal 类型模板 */
 	private async installNormal() {
-		const { npmName, ignore, installCommand, startCommand } =
+		const { ignore, installCommand, startCommand } =
 			this.projectInfo.projectTemplate;
 		// 检查模板信息是否存在
 		if (!this.templateNpmInfo) {

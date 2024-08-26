@@ -7,7 +7,8 @@ import PackageHandler from "@yutu-software-cli/package-handler";
 
 // core/exec/src/constants.ts
 var SETTINGS = {
-  init: "@yutu-software-cli/init"
+  init: "@yutu-software-cli/init",
+  add: "@yutu-software-cli/add"
 };
 var CACHE_DIR = "dependencies";
 
