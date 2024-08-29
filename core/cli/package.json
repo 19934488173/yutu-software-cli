@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/cli",
-	"version": "1.6.5",
+	"version": "1.6.6",
 	"description": "@yutu-software-cli cli",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -12,9 +12,9 @@
 	},
 	"dependencies": {
 		"@yutu-software-cli/debug-log": "^1.6.5",
-		"@yutu-software-cli/exec": "^1.6.5",
+		"@yutu-software-cli/exec": "^1.6.6",
 		"@yutu-software-cli/get-npm-info": "^1.6.2",
-		"@yutu-software-cli/share-utils": "^1.6.2",
+		"@yutu-software-cli/share-utils": "^1.6.6",
 		"chalk": "^5.3.0",
 		"commander": "^12.1.0",
 		"dotenv": "^16.4.5",

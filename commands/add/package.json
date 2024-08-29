@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/add",
-	"version": "1.6.2",
+	"version": "1.6.6",
 	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -11,12 +11,12 @@
 	},
 	"dependencies": {
 		"@yutu-software-cli/command-handler": "workspace:*",
-		"@yutu-software-cli/inquirer-prompts": "workspace:*",
 		"@yutu-software-cli/debug-log": "workspace:*",
+		"@yutu-software-cli/ejs-render": "workspace:*",
+		"@yutu-software-cli/inquirer-prompts": "workspace:*",
 		"@yutu-software-cli/package-handler": "workspace:*",
 		"@yutu-software-cli/share-utils": "workspace:*",
 		"@yutu-software-cli/template-installer": "workspace:*",
-		"@yutu-software-cli/ejs-render": "workspace:*",
 		"user-home": "^3.0.0"
 	},
 	"directories": {
