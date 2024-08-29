@@ -1,12 +1,12 @@
 import CommandHandler from '@yutu-software-cli/command-handler';
 import createLogger from '@yutu-software-cli/debug-log';
 import { catchError } from '@yutu-software-cli/share-utils';
-import { ITemplateInfo, Logger } from './types';
+import { ITemplateInfo } from './types';
 import getTemplateInfo from './getTemplateInfo';
 import InstallService from './installService';
 
 class AddCommand extends CommandHandler {
-	private logger: Logger = createLogger('@yutu-software-cli:add');
+	private logger = createLogger('@yutu-software-cli:add');
 	private templateInfo: ITemplateInfo | undefined = undefined;
 
 	init() {}
@@ -19,7 +19,7 @@ class AddCommand extends CommandHandler {
 			// 执行安装服务
 			await this.executeInstallService();
 		} catch (error) {
-			catchError({ msg: '命令执行失败:', error });
+			catchError({ msg: 'add命令执行失败:', error });
 		}
 	}
 

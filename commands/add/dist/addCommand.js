@@ -130,10 +130,13 @@ var getTemplateInfo_default = getTemplateInfo;
 import path from "path";
 import userHome from "user-home";
 import templateInstaller from "@yutu-software-cli/template-installer";
-import { sleep, spinnerStart } from "@yutu-software-cli/share-utils";
+import {
+  sleep,
+  spinnerStart,
+  catchError as catchError2
+} from "@yutu-software-cli/share-utils";
 import createLogger from "@yutu-software-cli/debug-log";
 import { ejsRender, fse } from "@yutu-software-cli/ejs-render";
-import { catchError as catchError2 } from "@yutu-software-cli/share-utils";
 var InstallService = class {
   logger = createLogger("@yutu-software-cli:add");
   executeDir = "";
@@ -228,7 +231,7 @@ var AddCommand = class extends CommandHandler {
       await this.prepareTemplateInfo();
       await this.executeInstallService();
     } catch (error) {
-      catchError3({ msg: "\u547D\u4EE4\u6267\u884C\u5931\u8D25:", error });
+      catchError3({ msg: "add\u547D\u4EE4\u6267\u884C\u5931\u8D25:", error });
     }
   }
   /** 获取模板信息 */

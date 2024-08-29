@@ -2,10 +2,13 @@ import path from 'path';
 import userHome from 'user-home';
 import templateInstaller from '@yutu-software-cli/template-installer';
 import PackageHandler from '@yutu-software-cli/package-handler';
-import { sleep, spinnerStart } from '@yutu-software-cli/share-utils';
+import {
+	sleep,
+	spinnerStart,
+	catchError
+} from '@yutu-software-cli/share-utils';
 import createLogger from '@yutu-software-cli/debug-log';
 import { ejsRender, fse } from '@yutu-software-cli/ejs-render';
-import { catchError } from '@yutu-software-cli/share-utils';
 import { ITemplateInfo, Logger } from './types';
 
 class InstallService {

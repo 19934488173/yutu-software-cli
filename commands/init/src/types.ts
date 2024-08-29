@@ -1,8 +1,4 @@
 import PackageHandler from '@yutu-software-cli/package-handler';
-export const TYPE_PROJECT = 'project' as const;
-export const TYPE_COMPONENT = 'component' as const;
-export const TEMPLATE_TYPE_NORMAL = 'normal' as const;
-export const TEMPLATE_TYPE_CUSTOM = 'custom' as const;
 
 export const WHITE_COMMAND = ['npm', 'cnpm', 'pnpm', 'yarn'];
 
@@ -14,7 +10,6 @@ export interface IProjectTemplate {
 	name: string;
 	version: string;
 	npmName: string;
-	type: typeof TEMPLATE_TYPE_NORMAL | typeof TEMPLATE_TYPE_CUSTOM;
 	ignore?: string[];
 	tag?: string[];
 	buildPath?: string;
@@ -24,12 +19,9 @@ export interface IProjectTemplate {
 }
 
 // 项目选中信息
-export interface IProjectInfo {
-	type: typeof TYPE_PROJECT | typeof TYPE_COMPONENT;
+export interface IProjectInfo extends IProjectTemplate {
 	projectName: string;
 	projectVersion: string;
-	projectTemplate: IProjectTemplate;
-	className?: string;
 }
 
 //准备阶段方法参数
