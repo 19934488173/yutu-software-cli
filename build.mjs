@@ -25,6 +25,7 @@ const excludeFiles = [
 	'ejs',
 	'glob',
 	'axios',
+	'@inquirer/prompts',
 	'@yutu-software-cli/debug-log',
 	'@yutu-software-cli/get-npm-info',
 	'@yutu-software-cli/exec',
@@ -33,7 +34,9 @@ const excludeFiles = [
 	'@yutu-software-cli/command-handler',
 	'@yutu-software-cli/init',
 	'@yutu-software-cli/add',
-	'@yutu-software-cli/template-installer'
+	'@yutu-software-cli/template-installer',
+	'@yutu-software-cli/inquirer-prompts',
+	'@yutu-software-cli/ejs-render'
 ];
 
 const __filename = fileURLToPath(import.meta.url);
@@ -49,7 +52,9 @@ const packages = [
 	path.join(__dirname, 'utils/share-utils'),
 	path.join(__dirname, 'utils/debug-log'),
 	path.join(__dirname, 'utils/get-npm-info'),
-	path.join(__dirname, 'utils/template-installer')
+	path.join(__dirname, 'utils/template-installer'),
+	path.join(__dirname, 'utils/inquirer-prompts'),
+	path.join(__dirname, 'utils/ejs-render')
 ];
 
 const hashFile = (filePath) => {

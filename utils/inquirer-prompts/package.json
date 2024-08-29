@@ -1,0 +1,33 @@
+{
+	"name": "@yutu-software-cli/inquirer-prompts",
+	"version": "1.6.5",
+	"description": "@yutu-software-cli inquirer-prompts",
+	"author": "amberHe <1542588809@qq.com>",
+	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
+	"license": "ISC",
+	"main": "dist/index.js",
+	"directories": {
+		"lib": "dist",
+		"test": "__tests__"
+	},
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/19934488173/yutu-software-cli.git"
+	},
+	"scripts": {
+		"test": "node ./__tests__/@yutu-software-cli/inquirer-prompts.test.js"
+	},
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/19934488173/yutu-software-cli/issues"
+	},
+	"dependencies": {
+		"@inquirer/prompts": "^5.3.8"
+	}
+}

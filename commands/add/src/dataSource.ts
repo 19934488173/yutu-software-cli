@@ -1,28 +1,55 @@
-export const ADD_MODE_SECTION = 'section';
-export const ADD_MODE_PAGE = 'page';
-/** 模版类型选项 */
-export const TEMPLATE_TYPE = [
-	{ name: '页面模板', value: ADD_MODE_PAGE },
-	{ name: '代码片段', value: ADD_MODE_SECTION }
-];
+import { TemplateItem, TemplateModules } from './types';
 
-export const TEMPLATE_LIST = [
-	{ name: '首页', value: 'home', module: 'page', version: '1.0.0' },
-	{ name: '页脚', value: 'footer', module: 'page', version: '1.0.0' },
+/** 所有模版 */
+export const TEMPLATE_LIST: TemplateItem[] = [
 	{
-		name: 'useParamsContext',
-		value: 'yutu-software-template-section',
-		module: 'section',
-		version: '1.0.0'
+		name: '榜单table',
+		value: 'list',
+		npmName: 'yutu-software-template-section',
+		module: TemplateModules.page,
+		version: 'latest',
+		copyPath: 'src/pages',
+		sourcePath: 'template/pages/list',
+		ignore: ['**/node_modules/**']
 	},
-	{ name: '文本', value: 'text', module: 'section', version: '1.0.0' }
+	{
+		name: 'context模版',
+		value: 'paramsContext',
+		npmName: 'yutu-software-template-section',
+		module: TemplateModules.context,
+		version: 'latest',
+		copyPath: 'src/pages',
+		sourcePath: 'template/contexts/paramsContext',
+		ignore: []
+	},
+	{
+		name: 'swr本地存储',
+		value: 'swrStorage',
+		npmName: 'yutu-software-template-section',
+		module: TemplateModules.data,
+		version: 'latest',
+		copyPath: 'src/pages/data',
+		sourcePath: 'template/data/swrStorage',
+		ignore: ['']
+	},
+	{
+		name: 'swr请求',
+		value: 'swrRequest',
+		npmName: 'yutu-software-template-section',
+		module: TemplateModules.data,
+		version: 'latest',
+		copyPath: 'src/pages/data',
+		sourcePath: 'template/data/swrRequest',
+		ignore: ['']
+	},
+	{
+		name: '基础图表',
+		value: 'baseChart',
+		npmName: 'yutu-software-template-section',
+		module: TemplateModules.echarts,
+		version: 'latest',
+		copyPath: 'src/pages',
+		sourcePath: 'template/echarts/baseChart',
+		ignore: ['chart-data.ts']
+	}
 ];
-
-/** 根据模版数据筛选出页面模版 */
-export const PAGE_TEMPLATE_LIST = TEMPLATE_LIST.filter(
-	(item) => item.module === 'page'
-);
-/** 根据模版数据筛选出代码模版 */
-export const SECTION_TEMPLATE_LIST = TEMPLATE_LIST.filter(
-	(item) => item.module === 'section'
-);

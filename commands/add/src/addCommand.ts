@@ -1,45 +1,45 @@
 import CommandHandler from '@yutu-software-cli/command-handler';
 import createLogger from '@yutu-software-cli/debug-log';
-
-import { getAddMode } from './templateService';
+import { catchError } from '@yutu-software-cli/share-utils';
+import { ITemplateInfo, Logger } from './types';
+import getTemplateInfo from './getTemplateInfo';
 import InstallService from './installService';
-import { ADD_MODE_SECTION } from './dataSource';
 
-// AddCommand 类，继承自 CommandHandler 基类
 class AddCommand extends CommandHandler {
-	private templateName: string;
-	private force: boolean | undefined;
-	private logger: ReturnType<typeof createLogger> | undefined;
+	private logger: Logger = createLogger('@yutu-software-cli:add');
+	private templateInfo: ITemplateInfo | undefined = undefined;
 
-	//初始化命令参数
-	init() {
-		this.logger = createLogger('@yutu-software-cli:add');
-		this.templateName = this._argv[0] || '';
-		this.force = this._argv[1]?.force || false;
-		this.logger.log('templateName', this.templateName);
-		this.logger.log('force', this.force);
-	}
+	init() {}
 
-	// 命令执行的主逻辑
+	/* 命令执行的主逻辑 */
 	public async exec() {
 		try {
-			// 获取添加模式
-			const addModule = await getAddMode();
-			if (!addModule) {
-				this.logger?.error('请选择添加模式');
-				return;
-			}
-
+			// 获取模板信息
+			await this.prepareTemplateInfo();
 			// 执行安装服务
-			const installService = new InstallService(
-				this.logger!,
-				addModule,
-				this.templateName
-			);
-			await installService.installModule();
-		} catch (e) {
-			this.logger?.error(e);
+			await this.executeInstallService();
+		} catch (error) {
+			catchError({ msg: '命令执行失败:', error });
 		}
+	}
+
+	/** 获取模板信息 */
+	private async prepareTemplateInfo() {
+		this.templateInfo = await getTemplateInfo();
+
+		if (!this.templateInfo) {
+			throw new Error('获取模板信息失败');
+		}
+		this.logger.info('模版信息：', this.templateInfo);
+	}
+
+	/** 执行安装服务 */
+	private async executeInstallService() {
+		if (!this.templateInfo) {
+			throw new Error('模板信息未定义，无法执行安装');
+		}
+		const installService = new InstallService(this.templateInfo);
+		await installService.installModule();
 	}
 }
 

@@ -17,6 +17,13 @@
 			"@yutu-software-cli/share-utils": ["utils/share-utils/src/index.ts"],
 			"@yutu-software-cli/debug-log": ["utils/debug-log/src/index.ts"],
 			"@yutu-software-cli/get-npm-info": ["utils/get-npm-info/src/index.ts"],
+			"@yutu-software-cli/ejs-render": ["utils/ejs-render/src/index.ts"],
+			"@yutu-software-cli/template-installer": [
+				"utils/template-installer/src/index.ts"
+			],
+			"@yutu-software-cli/inquirer-prompts": [
+				"utils/inquirer-prompts/src/index.ts"
+			],
 			"@yutu-software-cli/exec": ["core/exec/src/index.ts"],
 			"@yutu-software-cli/package-handler": [
 				"models/package-handler/src/index.ts"
@@ -24,9 +31,7 @@
 			"@yutu-software-cli/command-handler": [
 				"models/command-handler/src/index.ts"
 			],
-			"@yutu-software-cli/template-installer": [
-				"utils/template-installer/src/index.ts"
-			],
+
 			"npminstall": ["models/package-handler/types/npminstall.d.ts"]
 		},
 		"outDir": "./dist"

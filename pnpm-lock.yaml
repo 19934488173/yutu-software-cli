@@ -59,6 +59,12 @@ importers:
       '@yutu-software-cli/debug-log':
         specifier: workspace:*
         version: link:../../utils/debug-log
+      '@yutu-software-cli/ejs-render':
+        specifier: workspace:*
+        version: link:../../utils/ejs-render
+      '@yutu-software-cli/inquirer-prompts':
+        specifier: workspace:*
+        version: link:../../utils/inquirer-prompts
       '@yutu-software-cli/package-handler':
         specifier: workspace:*
         version: link:../../models/package-handler
@@ -68,19 +74,10 @@ importers:
       '@yutu-software-cli/template-installer':
         specifier: workspace:*
         version: link:../../utils/template-installer
-      fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
-      inquirer:
-        specifier: ^10.1.8
-        version: 10.1.8
       user-home:
         specifier: ^3.0.0
         version: 3.0.0
     devDependencies:
-      '@types/fs-extra':
-        specifier: ^11.0.4
-        version: 11.0.4
       '@types/user-home':
         specifier: ^2.0.2
         version: 2.0.2
@@ -253,6 +250,28 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6(supports-color@5.5.0)
 
+  utils/ejs-render:
+    dependencies:
+      ejs:
+        specifier: ^3.1.10
+        version: 3.1.10
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.2.0
+      glob:
+        specifier: ^11.0.0
+        version: 11.0.0
+      p-limit:
+        specifier: ^6.1.0
+        version: 6.1.0
+    devDependencies:
+      '@types/ejs':
+        specifier: ^3.1.5
+        version: 3.1.5
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+
   utils/get-npm-info:
     dependencies:
       axios:
@@ -271,6 +290,12 @@ importers:
       '@types/url-join':
         specifier: ^4.0.3
         version: 4.0.3
+
+  utils/inquirer-prompts:
+    dependencies:
+      '@inquirer/prompts':
+        specifier: ^5.3.8
+        version: 5.3.8
 
   utils/share-utils:
     dependencies:
