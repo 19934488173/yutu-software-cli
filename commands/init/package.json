@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/init",
-	"version": "1.6.6",
+	"version": "1.6.7",
 	"description": "@yutu-software-cli init",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -36,8 +36,8 @@
 		"@yutu-software-cli/debug-log": "^1.6.5",
 		"@yutu-software-cli/ejs-render": "workspace:*",
 		"@yutu-software-cli/inquirer-prompts": "workspace:*",
-		"@yutu-software-cli/package-handler": "^1.6.6",
-		"@yutu-software-cli/share-utils": "^1.6.6",
+		"@yutu-software-cli/package-handler": "^1.6.7",
+		"@yutu-software-cli/share-utils": "^1.6.7",
 		"@yutu-software-cli/template-installer": "workspace:*",
 		"semver": "^7.6.3",
 		"user-home": "^3.0.0"
