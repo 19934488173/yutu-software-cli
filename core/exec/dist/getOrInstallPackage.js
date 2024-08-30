@@ -1,5 +1,6 @@
 // core/exec/src/getOrInstallPackage.ts
 import path from "path";
+import { shouldUpdate, updateTimestamp } from "@yutu-software-cli/share-utils";
 import PackageHandler from "@yutu-software-cli/package-handler";
 
 // core/exec/src/constants.ts
@@ -11,6 +12,8 @@ var resolveCachePath = (homePath, dir) => {
   const storeDir = path.resolve(cachePath, "node_modules");
   return { cachePath, storeDir };
 };
+var PACKAGE_UPDATE_INTERVAL = 72 * 60 * 60 * 1e3;
+var TIMESTAMP_FILE_NAME = ".lastUpdate";
 var getOrInstallPackage = async (options) => {
   const { targetPath, homePath, packageName, packageVersion, logger } = options;
   let pkg;
@@ -25,9 +28,17 @@ var getOrInstallPackage = async (options) => {
       packageVersion
     });
     if (await pkg.exists()) {
-      await pkg.update();
+      if (await shouldUpdate(
+        cachePath,
+        PACKAGE_UPDATE_INTERVAL,
+        TIMESTAMP_FILE_NAME
+      )) {
+        await pkg.update();
+        await updateTimestamp(cachePath, TIMESTAMP_FILE_NAME);
+      }
     } else {
       await pkg.install();
+      await updateTimestamp(cachePath, TIMESTAMP_FILE_NAME);
     }
   } else {
     pkg = new PackageHandler({ targetPath, packageName, packageVersion });

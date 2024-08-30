@@ -7,9 +7,9 @@ var isObject_default = isObject;
 // utils/share-utils/src/readPackageJson.ts
 import { readFileSync } from "fs";
 import { join } from "path";
-var readPackageJson = (path2) => {
+var readPackageJson = (path3) => {
   try {
-    const newPath = path2.replace(/\/dist$/, "");
+    const newPath = path3.replace(/\/dist$/, "");
     const fullPath = join(newPath, "./package.json");
     const data = readFileSync(fullPath, "utf-8");
     return JSON.parse(data);
@@ -76,12 +76,33 @@ var catchError = (options) => {
   process.exit(exitCode);
 };
 var catch_error_default = catchError;
+
+// utils/share-utils/src/time-stamp.ts
+import path2 from "path";
+import fs from "fs/promises";
+var shouldUpdate = async (targetPath, interval, timestampFileName) => {
+  const timestampFile = path2.resolve(targetPath, timestampFileName);
+  try {
+    const lastUpdate = await fs.readFile(timestampFile, "utf-8");
+    const lastUpdateTime = new Date(parseInt(lastUpdate, 10));
+    const now = /* @__PURE__ */ new Date();
+    return now.getTime() - lastUpdateTime.getTime() > interval;
+  } catch {
+    return true;
+  }
+};
+var updateTimestamp = async (targetPath, timestampFileName) => {
+  const timestampFile = path2.resolve(targetPath, timestampFileName);
+  await fs.writeFile(timestampFile, Date.now().toString(), "utf-8");
+};
 export {
   catch_error_default as catchError,
   format_path_default as formatPath,
   isObject_default as isObject,
   readPackageJson_default as readPackageJson,
+  shouldUpdate,
   sleep_default as sleep,
   spawn_plus_default as spawnPlus,
-  spinner_start_default as spinnerStart
+  spinner_start_default as spinnerStart,
+  updateTimestamp
 };

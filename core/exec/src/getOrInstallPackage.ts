@@ -1,4 +1,5 @@
 import path from 'path';
+import { shouldUpdate, updateTimestamp } from '@yutu-software-cli/share-utils';
 import PackageHandler from '@yutu-software-cli/package-handler';
 
 import { CACHE_DIR } from './constants';
@@ -10,6 +11,9 @@ const resolveCachePath = (homePath: string, dir: string) => {
 	const storeDir = path.resolve(cachePath, 'node_modules');
 	return { cachePath, storeDir };
 };
+
+const PACKAGE_UPDATE_INTERVAL = 72 * 60 * 60 * 1000; // 24小时
+const TIMESTAMP_FILE_NAME = '.lastUpdate';
 
 // 获取或安装包的函数
 const getOrInstallPackage = async (options: IGetOrInstallPackage) => {
@@ -31,14 +35,27 @@ const getOrInstallPackage = async (options: IGetOrInstallPackage) => {
 			packageName,
 			packageVersion
 		});
-		// 如果包已经存在，则更新包，否则安装包
+
+		// 检查包是否存在
 		if (await pkg.exists()) {
-			await pkg.update();
+			// 检查是否需要更新包
+			if (
+				await shouldUpdate(
+					cachePath,
+					PACKAGE_UPDATE_INTERVAL,
+					TIMESTAMP_FILE_NAME
+				)
+			) {
+				await pkg.update();
+				await updateTimestamp(cachePath, TIMESTAMP_FILE_NAME); // 更新成功后更新时间戳
+			}
 		} else {
+			// 安装包并设置时间戳
 			await pkg.install();
+			await updateTimestamp(cachePath, TIMESTAMP_FILE_NAME);
 		}
 	} else {
-		// 如果目标路径已指定，直接使用它创建包处理程序实例
+		// 如果指定了 targetPath，则直接使用它创建包处理程序实例
 		pkg = new PackageHandler({ targetPath, packageName, packageVersion });
 	}
 	return pkg;

@@ -1,6 +1,14 @@
 import PackageHandler from '@yutu-software-cli/package-handler';
 import createLogger from '@yutu-software-cli/debug-log';
-import { sleep, spinnerStart } from '@yutu-software-cli/share-utils';
+import {
+	sleep,
+	spinnerStart,
+	shouldUpdate,
+	updateTimestamp
+} from '@yutu-software-cli/share-utils';
+
+const TEMPLATE_UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 72小时
+const TIMESTAMP_FILE_NAME = '.lastTemplateUpdate';
 
 //模版安装及更新逻辑
 interface IOptions {
@@ -36,11 +44,23 @@ const templateInstaller = async (options: IOptions) => {
 
 	try {
 		if (templateExists) {
-			// 如果模板存在，执行更新操作
-			await template.update();
+			// 检查是否需要更新模板
+			if (
+				await shouldUpdate(
+					targetPath,
+					TEMPLATE_UPDATE_INTERVAL,
+					TIMESTAMP_FILE_NAME
+				)
+			) {
+				await template.update();
+				await updateTimestamp(targetPath, TIMESTAMP_FILE_NAME); // 更新成功后更新时间戳
+			} else {
+				logger.info('模板已存在且在6小时内已更新，无需再次更新。');
+			}
 		} else {
 			// 如果模板不存在，执行安装操作
 			await template.install();
+			await updateTimestamp(targetPath, TIMESTAMP_FILE_NAME); // 安装后设置时间戳
 		}
 
 		// 模板下载或更新成功后的操作

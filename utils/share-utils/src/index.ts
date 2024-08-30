@@ -5,6 +5,7 @@ import spawnPlus from './spawn-plus';
 import sleep from './sleep';
 import spinnerStart from './spinner-start';
 import catchError from './catch-error';
+import { shouldUpdate, updateTimestamp } from './time-stamp';
 
 /** 公共方法导出口 */
 export {
@@ -14,5 +15,7 @@ export {
 	spawnPlus,
 	sleep,
 	spinnerStart,
-	catchError
+	catchError,
+	shouldUpdate,
+	updateTimestamp
 };

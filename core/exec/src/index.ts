@@ -1,6 +1,5 @@
 import { Command } from 'commander';
 import createLogger from '@yutu-software-cli/debug-log';
-
 import getOrInstallPackage from './getOrInstallPackage';
 import executeCommand from './executeCommand';
 import { SETTINGS } from './constants';
