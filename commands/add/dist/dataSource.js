@@ -1,21 +1,10 @@
-// commands/add/src/types.ts
-var TemplateModules = {
-  data: "data",
-  page: "page",
-  echarts: "echarts",
-  context: "context",
-  components: "components",
-  hooks: "hooks",
-  section: "section"
-};
-
 // commands/add/src/dataSource.ts
 var TEMPLATE_LIST = [
   {
     name: "\u699C\u5355table",
-    value: "list",
+    value: "rank-table",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.page,
+    module: "pages",
     version: "latest",
     copyPath: "src/pages",
     sourcePath: "template/pages/list",
@@ -25,7 +14,7 @@ var TEMPLATE_LIST = [
     name: "context\u6A21\u7248",
     value: "paramsContext",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.context,
+    module: "fragment",
     version: "latest",
     copyPath: "src/pages",
     sourcePath: "template/contexts/paramsContext",
@@ -35,7 +24,7 @@ var TEMPLATE_LIST = [
     name: "swr\u672C\u5730\u5B58\u50A8",
     value: "swrStorage",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.data,
+    module: "fragment",
     version: "latest",
     copyPath: "src/pages/data",
     sourcePath: "template/data/swrStorage",
@@ -45,7 +34,7 @@ var TEMPLATE_LIST = [
     name: "swr\u8BF7\u6C42",
     value: "swrRequest",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.data,
+    module: "fragment",
     version: "latest",
     copyPath: "src/pages/data",
     sourcePath: "template/data/swrRequest",
@@ -53,12 +42,17 @@ var TEMPLATE_LIST = [
   },
   {
     name: "\u57FA\u7840\u56FE\u8868",
-    value: "baseChart",
-    npmName: "yutu-software-template-section",
-    module: TemplateModules.echarts,
+    value: "BaseChart",
+    npmName: "template-storybook",
+    module: "component",
     version: "latest",
     copyPath: "src/pages",
-    sourcePath: "template/echarts/baseChart",
+    /** 组件相关源码路径 */
+    sourceCodePath: [
+      "/src/components/echarts/BaseChart",
+      "/src/components/echarts/publicConfig"
+    ],
+    sourcePath: "src/pages/baseChart",
     ignore: ["chart-data.ts"]
   }
 ];

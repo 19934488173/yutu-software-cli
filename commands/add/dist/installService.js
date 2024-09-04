@@ -17,6 +17,10 @@ var InstallService = class {
   // 拷贝目标路径
   templatePath = "";
   // 模板路径
+  componentPath = [];
+  // 组件路径
+  componentTargetPath = [];
+  // 组件路径
   templateInfo;
   templateNpmInfo = null;
   constructor(templateInfo) {
@@ -37,7 +41,15 @@ var InstallService = class {
     if (!this.templateNpmInfo) {
       throw new Error("\u6A21\u677F\u4FE1\u606F\u672A\u4E0B\u8F7D\uFF0C\u8BF7\u5148\u4E0B\u8F7D\u6A21\u677F");
     }
-    const { copyPath, sourcePath } = this.templateInfo;
+    const { copyPath, sourcePath, sourceCodePath } = this.templateInfo;
+    if (sourceCodePath && sourceCodePath?.length > 0) {
+      this.componentPath = sourceCodePath.map(
+        (path2) => `${this.templateNpmInfo?.cacheFilePath}${path2}`
+      );
+      this.componentTargetPath = sourceCodePath.map(
+        (path2) => `${this.executeDir}${path2}`
+      );
+    }
     this.targetPath = path.resolve(this.executeDir, copyPath);
     this.templatePath = path.resolve(
       this.templateNpmInfo.cacheFilePath,
@@ -73,6 +85,15 @@ var InstallService = class {
     const spinner = spinnerStart("\u6B63\u5728\u5B89\u88C5\u6A21\u677F...");
     await sleep();
     try {
+      if (this.componentPath?.length > 0) {
+        for (let i = 0; i < this.componentPath.length; i++) {
+          const componentPath = this.componentPath[i];
+          const componentTargetPath = this.componentTargetPath[i];
+          if (fse.pathExistsSync(componentPath)) {
+            fse.copySync(componentPath, componentTargetPath);
+          }
+        }
+      }
       fse.ensureDirSync(this.templatePath);
       fse.ensureDirSync(this.targetPath);
       fse.copySync(this.templatePath, this.targetPath);

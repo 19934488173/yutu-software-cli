@@ -16,6 +16,8 @@ class InstallService {
 	private executeDir = ''; // 执行目录
 	private targetPath = ''; // 拷贝目标路径
 	private templatePath = ''; // 模板路径
+	private componentPath = [] as string[]; // 组件路径
+	private componentTargetPath = [] as string[]; // 组件路径
 	private templateInfo: ITemplateInfo;
 	private templateNpmInfo: InstanceType<typeof PackageHandler> | null = null;
 
@@ -42,7 +44,16 @@ class InstallService {
 		if (!this.templateNpmInfo) {
 			throw new Error('模板信息未下载，请先下载模板');
 		}
-		const { copyPath, sourcePath } = this.templateInfo;
+		const { copyPath, sourcePath, sourceCodePath } = this.templateInfo;
+		//组件源码路径存在，计算出要拷贝的组件路径
+		if (sourceCodePath && sourceCodePath?.length > 0) {
+			this.componentPath = sourceCodePath.map(
+				(path) => `${this.templateNpmInfo?.cacheFilePath}${path}`
+			);
+			this.componentTargetPath = sourceCodePath.map(
+				(path) => `${this.executeDir}${path}`
+			);
+		}
 		this.targetPath = path.resolve(this.executeDir, copyPath);
 		this.templatePath = path.resolve(
 			this.templateNpmInfo.cacheFilePath,
@@ -81,6 +92,17 @@ class InstallService {
 		const spinner = spinnerStart('正在安装模板...');
 		await sleep();
 		try {
+			// 安装相关组件逻辑
+			if (this.componentPath?.length > 0) {
+				for (let i = 0; i < this.componentPath.length; i++) {
+					const componentPath = this.componentPath[i];
+					const componentTargetPath = this.componentTargetPath[i];
+					if (fse.pathExistsSync(componentPath)) {
+						fse.copySync(componentPath, componentTargetPath);
+					}
+				}
+			}
+
 			// 确保模板源路径和目标路径存在
 			fse.ensureDirSync(this.templatePath);
 			fse.ensureDirSync(this.targetPath);

@@ -1,12 +1,12 @@
-import { TemplateItem, TemplateModules } from './types';
+import { TemplateItem } from './types';
 
 /** 所有模版 */
 export const TEMPLATE_LIST: TemplateItem[] = [
 	{
 		name: '榜单table',
-		value: 'list',
+		value: 'rank-table',
 		npmName: 'yutu-software-template-section',
-		module: TemplateModules.page,
+		module: 'pages',
 		version: 'latest',
 		copyPath: 'src/pages',
 		sourcePath: 'template/pages/list',
@@ -16,7 +16,7 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 		name: 'context模版',
 		value: 'paramsContext',
 		npmName: 'yutu-software-template-section',
-		module: TemplateModules.context,
+		module: 'fragment',
 		version: 'latest',
 		copyPath: 'src/pages',
 		sourcePath: 'template/contexts/paramsContext',
@@ -26,7 +26,7 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 		name: 'swr本地存储',
 		value: 'swrStorage',
 		npmName: 'yutu-software-template-section',
-		module: TemplateModules.data,
+		module: 'fragment',
 		version: 'latest',
 		copyPath: 'src/pages/data',
 		sourcePath: 'template/data/swrStorage',
@@ -36,7 +36,7 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 		name: 'swr请求',
 		value: 'swrRequest',
 		npmName: 'yutu-software-template-section',
-		module: TemplateModules.data,
+		module: 'fragment',
 		version: 'latest',
 		copyPath: 'src/pages/data',
 		sourcePath: 'template/data/swrRequest',
@@ -44,12 +44,17 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 	},
 	{
 		name: '基础图表',
-		value: 'baseChart',
-		npmName: 'yutu-software-template-section',
-		module: TemplateModules.echarts,
+		value: 'BaseChart',
+		npmName: 'template-storybook',
+		module: 'component',
 		version: 'latest',
 		copyPath: 'src/pages',
-		sourcePath: 'template/echarts/baseChart',
+		/** 组件相关源码路径 */
+		sourceCodePath: [
+			'/src/components/echarts/BaseChart',
+			'/src/components/echarts/publicConfig'
+		],
+		sourcePath: 'src/pages/baseChart',
 		ignore: ['chart-data.ts']
 	}
 ];

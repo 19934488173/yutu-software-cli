@@ -7,24 +7,13 @@ import { catchError as catchError3 } from "@yutu-software-cli/share-utils";
 import { safeSelectPrompt, input } from "@yutu-software-cli/inquirer-prompts";
 import { catchError } from "@yutu-software-cli/share-utils";
 
-// commands/add/src/types.ts
-var TemplateModules = {
-  data: "data",
-  page: "page",
-  echarts: "echarts",
-  context: "context",
-  components: "components",
-  hooks: "hooks",
-  section: "section"
-};
-
 // commands/add/src/dataSource.ts
 var TEMPLATE_LIST = [
   {
     name: "\u699C\u5355table",
-    value: "list",
+    value: "rank-table",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.page,
+    module: "pages",
     version: "latest",
     copyPath: "src/pages",
     sourcePath: "template/pages/list",
@@ -34,7 +23,7 @@ var TEMPLATE_LIST = [
     name: "context\u6A21\u7248",
     value: "paramsContext",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.context,
+    module: "fragment",
     version: "latest",
     copyPath: "src/pages",
     sourcePath: "template/contexts/paramsContext",
@@ -44,7 +33,7 @@ var TEMPLATE_LIST = [
     name: "swr\u672C\u5730\u5B58\u50A8",
     value: "swrStorage",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.data,
+    module: "fragment",
     version: "latest",
     copyPath: "src/pages/data",
     sourcePath: "template/data/swrStorage",
@@ -54,7 +43,7 @@ var TEMPLATE_LIST = [
     name: "swr\u8BF7\u6C42",
     value: "swrRequest",
     npmName: "yutu-software-template-section",
-    module: TemplateModules.data,
+    module: "fragment",
     version: "latest",
     copyPath: "src/pages/data",
     sourcePath: "template/data/swrRequest",
@@ -62,35 +51,38 @@ var TEMPLATE_LIST = [
   },
   {
     name: "\u57FA\u7840\u56FE\u8868",
-    value: "baseChart",
-    npmName: "yutu-software-template-section",
-    module: TemplateModules.echarts,
+    value: "BaseChart",
+    npmName: "template-storybook",
+    module: "component",
     version: "latest",
     copyPath: "src/pages",
-    sourcePath: "template/echarts/baseChart",
+    /** 组件相关源码路径 */
+    sourceCodePath: [
+      "/src/components/echarts/BaseChart",
+      "/src/components/echarts/publicConfig"
+    ],
+    sourcePath: "src/pages/baseChart",
     ignore: ["chart-data.ts"]
   }
 ];
 
 // commands/add/src/promptUtils.ts
-var TEMPLATE_TYPE = Object.values(TemplateModules).map((value) => ({
-  name: value,
-  value
-}));
-var filterTemplatesByModule = (module) => TEMPLATE_LIST.filter((item) => item.module === module);
+var TEMPLATE_TYPE = [
+  {
+    name: "\u4EE3\u7801\u7247\u6BB5",
+    value: "fragment"
+  },
+  {
+    name: "\u7EC4\u4EF6",
+    value: "component"
+  }
+];
 var modulePrompt = {
   message: "\u8BF7\u9009\u62E9\u4EE3\u7801\u590D\u7528\u7C7B\u578B",
   choices: TEMPLATE_TYPE
 };
-var getNpmNamePrompt = (module) => {
-  const choices = filterTemplatesByModule(module);
-  return {
-    message: `\u8BF7\u9009\u62E9${module}\u6A21\u677F`,
-    choices
-  };
-};
 var namePrompt = {
-  message: `\u8BF7\u8F93\u5165\u6A21\u7248\u540D\u79F0`,
+  message: `\u8BF7\u8F93\u5165\u751F\u6210\u6587\u4EF6\u540D\u79F0`,
   validate: (value) => !value || !value.trim() ? `\u540D\u79F0\u4E0D\u80FD\u4E3A\u7A7A` : true
 };
 var getCopyPathPrompt = (defaultPath) => {
@@ -103,23 +95,34 @@ var getCopyPathPrompt = (defaultPath) => {
 
 // commands/add/src/getTemplateInfo.ts
 var getTemplateInfo = async () => {
-  let templateInfo = {};
   try {
     const module = await safeSelectPrompt(modulePrompt);
-    const npmName = await safeSelectPrompt(getNpmNamePrompt(module));
+    let npmName;
+    if (module === "fragment") {
+      const fragmentList = TEMPLATE_LIST.filter(
+        (item) => item.module === module
+      );
+      npmName = await safeSelectPrompt({
+        message: "\u8BF7\u9009\u62E9\u4EE3\u7801\u6A21\u677F",
+        choices: fragmentList
+      });
+    } else {
+      npmName = await input({
+        message: "\u8BF7\u8F93\u5165\u7EC4\u4EF6\u540D\u79F0",
+        default: "BaseChart"
+      });
+    }
     const templateName = await input(namePrompt);
     const template = TEMPLATE_LIST.find((item) => item.value === npmName);
     const copyPath = await input(getCopyPathPrompt(template?.copyPath || ""));
     if (!template) {
       catchError({ msg: "\u672A\u627E\u5230\u5BF9\u5E94\u7684\u6A21\u677F\u4FE1\u606F" });
-    } else {
-      templateInfo = {
-        ...template,
-        copyPath,
-        templateName
-      };
     }
-    return templateInfo;
+    return {
+      ...template,
+      copyPath,
+      templateName
+    };
   } catch (error) {
     catchError({ msg: "\u83B7\u53D6\u6A21\u677F\u4FE1\u606F\u65F6\u53D1\u751F\u9519\u8BEF:", error });
   }
@@ -145,6 +148,10 @@ var InstallService = class {
   // 拷贝目标路径
   templatePath = "";
   // 模板路径
+  componentPath = [];
+  // 组件路径
+  componentTargetPath = [];
+  // 组件路径
   templateInfo;
   templateNpmInfo = null;
   constructor(templateInfo) {
@@ -165,7 +172,15 @@ var InstallService = class {
     if (!this.templateNpmInfo) {
       throw new Error("\u6A21\u677F\u4FE1\u606F\u672A\u4E0B\u8F7D\uFF0C\u8BF7\u5148\u4E0B\u8F7D\u6A21\u677F");
     }
-    const { copyPath, sourcePath } = this.templateInfo;
+    const { copyPath, sourcePath, sourceCodePath } = this.templateInfo;
+    if (sourceCodePath && sourceCodePath?.length > 0) {
+      this.componentPath = sourceCodePath.map(
+        (path2) => `${this.templateNpmInfo?.cacheFilePath}${path2}`
+      );
+      this.componentTargetPath = sourceCodePath.map(
+        (path2) => `${this.executeDir}${path2}`
+      );
+    }
     this.targetPath = path.resolve(this.executeDir, copyPath);
     this.templatePath = path.resolve(
       this.templateNpmInfo.cacheFilePath,
@@ -201,6 +216,15 @@ var InstallService = class {
     const spinner = spinnerStart("\u6B63\u5728\u5B89\u88C5\u6A21\u677F...");
     await sleep();
     try {
+      if (this.componentPath?.length > 0) {
+        for (let i = 0; i < this.componentPath.length; i++) {
+          const componentPath = this.componentPath[i];
+          const componentTargetPath = this.componentTargetPath[i];
+          if (fse.pathExistsSync(componentPath)) {
+            fse.copySync(componentPath, componentTargetPath);
+          }
+        }
+      }
       fse.ensureDirSync(this.templatePath);
       fse.ensureDirSync(this.targetPath);
       fse.copySync(this.templatePath, this.targetPath);

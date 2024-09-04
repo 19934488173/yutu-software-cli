@@ -1,4 +1,4 @@
-import { select, confirm, input } from '@inquirer/prompts';
+import { select, confirm, input, search } from '@inquirer/prompts';
 
 interface PromptOptions {
 	message: string;
@@ -29,4 +29,4 @@ const handleSelectPromptError = (error: Error) => {
 	process.exit(1);
 };
 
-export { safeSelectPrompt, confirm, input };
+export { safeSelectPrompt, confirm, input, search };

@@ -1,5 +1,5 @@
 // utils/inquirer-prompts/src/index.ts
-import { select, confirm, input } from "@inquirer/prompts";
+import { select, confirm, input, search } from "@inquirer/prompts";
 var safeSelectPrompt = async (options) => {
   const { message, choices, defaultValue } = options;
   try {
@@ -24,5 +24,6 @@ var handleSelectPromptError = (error) => {
 export {
   confirm,
   input,
-  safeSelectPrompt
+  safeSelectPrompt,
+  search
 };
