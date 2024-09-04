@@ -8,17 +8,19 @@ var TEMPLATE_LIST = [
     version: "latest",
     copyPath: "src/pages",
     sourcePath: "template/pages/list",
-    ignore: ["**/node_modules/**"]
+    ignore: ["**/node_modules/**"],
+    type: "page"
   },
   {
     name: "context\u6A21\u7248",
-    value: "paramsContext",
+    value: "context",
     npmName: "yutu-software-template-section",
     module: "fragment",
     version: "latest",
     copyPath: "src/pages",
     sourcePath: "template/contexts/paramsContext",
-    ignore: []
+    ignore: [],
+    type: "context"
   },
   {
     name: "swr\u672C\u5730\u5B58\u50A8",
@@ -28,7 +30,8 @@ var TEMPLATE_LIST = [
     version: "latest",
     copyPath: "src/pages/data",
     sourcePath: "template/data/swrStorage",
-    ignore: [""]
+    ignore: [""],
+    type: "swr"
   },
   {
     name: "swr\u8BF7\u6C42",
@@ -38,7 +41,8 @@ var TEMPLATE_LIST = [
     version: "latest",
     copyPath: "src/pages/data",
     sourcePath: "template/data/swrRequest",
-    ignore: [""]
+    ignore: [""],
+    type: "swr"
   },
   {
     name: "\u57FA\u7840\u56FE\u8868",
@@ -53,7 +57,8 @@ var TEMPLATE_LIST = [
       "/src/components/echarts/publicConfig"
     ],
     sourcePath: "src/pages/baseChart",
-    ignore: ["chart-data.ts"]
+    ignore: ["chart-data.ts"],
+    type: "component"
   }
 ];
 export {

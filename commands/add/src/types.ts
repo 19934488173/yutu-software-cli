@@ -12,6 +12,7 @@ export interface TemplateItem {
 	copyPath: string;
 	sourcePath: string;
 	ignore: string[];
+	type: string;
 	sourceCodePath?: string[];
 }
 //模版字段的基础上扩展用户输入的信息

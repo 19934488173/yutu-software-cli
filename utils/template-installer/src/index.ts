@@ -7,7 +7,7 @@ import {
 	updateTimestamp
 } from '@yutu-software-cli/share-utils';
 
-const TEMPLATE_UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 72小时
+const TEMPLATE_UPDATE_INTERVAL = 6 * 60 * 60 * 1000; // 6小时
 const TIMESTAMP_FILE_NAME = '.lastTemplateUpdate';
 
 //模版安装及更新逻辑

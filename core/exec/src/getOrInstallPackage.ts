@@ -12,7 +12,7 @@ const resolveCachePath = (homePath: string, dir: string) => {
 	return { cachePath, storeDir };
 };
 
-const PACKAGE_UPDATE_INTERVAL = 72 * 60 * 60 * 1000; // 24小时
+const PACKAGE_UPDATE_INTERVAL = 24 * 60 * 60 * 1000; // 24小时
 const TIMESTAMP_FILE_NAME = '.lastUpdate';
 
 // 获取或安装包的函数

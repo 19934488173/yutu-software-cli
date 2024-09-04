@@ -10,17 +10,19 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 		version: 'latest',
 		copyPath: 'src/pages',
 		sourcePath: 'template/pages/list',
-		ignore: ['**/node_modules/**']
+		ignore: ['**/node_modules/**'],
+		type: 'page'
 	},
 	{
 		name: 'context模版',
-		value: 'paramsContext',
+		value: 'context',
 		npmName: 'yutu-software-template-section',
 		module: 'fragment',
 		version: 'latest',
 		copyPath: 'src/pages',
 		sourcePath: 'template/contexts/paramsContext',
-		ignore: []
+		ignore: [],
+		type: 'context'
 	},
 	{
 		name: 'swr本地存储',
@@ -30,7 +32,8 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 		version: 'latest',
 		copyPath: 'src/pages/data',
 		sourcePath: 'template/data/swrStorage',
-		ignore: ['']
+		ignore: [''],
+		type: 'swr'
 	},
 	{
 		name: 'swr请求',
@@ -40,7 +43,8 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 		version: 'latest',
 		copyPath: 'src/pages/data',
 		sourcePath: 'template/data/swrRequest',
-		ignore: ['']
+		ignore: [''],
+		type: 'swr'
 	},
 	{
 		name: '基础图表',
@@ -55,6 +59,7 @@ export const TEMPLATE_LIST: TemplateItem[] = [
 			'/src/components/echarts/publicConfig'
 		],
 		sourcePath: 'src/pages/baseChart',
-		ignore: ['chart-data.ts']
+		ignore: ['chart-data.ts'],
+		type: 'component'
 	}
 ];

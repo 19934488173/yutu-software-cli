@@ -19,7 +19,7 @@ var resolveCachePath = (homePath, dir) => {
   const storeDir = path.resolve(cachePath, "node_modules");
   return { cachePath, storeDir };
 };
-var PACKAGE_UPDATE_INTERVAL = 72 * 60 * 60 * 1e3;
+var PACKAGE_UPDATE_INTERVAL = 24 * 60 * 60 * 1e3;
 var TIMESTAMP_FILE_NAME = ".lastUpdate";
 var getOrInstallPackage = async (options) => {
   const { targetPath, homePath, packageName, packageVersion, logger } = options;
