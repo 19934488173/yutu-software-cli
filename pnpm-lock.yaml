@@ -124,7 +124,7 @@ importers:
         specifier: ^1.6.5
         version: link:../../utils/debug-log
       '@yutu-software-cli/exec':
-        specifier: ^1.6.7
+        specifier: ^1.6.9
         version: link:../exec
       '@yutu-software-cli/get-npm-info':
         specifier: ^1.6.2
