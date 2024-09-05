@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/package-handler",
-	"version": "1.6.10",
+	"version": "1.6.11",
 	"description": "> TODO: description",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -28,7 +28,7 @@
 		"url": "https://github.com/19934488173/yutu-software-cli/issues"
 	},
 	"dependencies": {
-		"@yutu-software-cli/get-npm-info": "^1.6.2",
+		"@yutu-software-cli/get-npm-info": "^1.6.11",
 		"@yutu-software-cli/share-utils": "^1.6.10",
 		"fs-extra": "^11.2.0",
 		"npminstall": "^7.12.0",
