@@ -8,15 +8,10 @@ export const TEMPLATE_TYPE = [
 		value: 'component'
 	}
 ];
-
+// 代码复用形式，组件 或 代码片段
 export const modulePrompt = {
 	message: '请选择代码复用类型',
 	choices: TEMPLATE_TYPE
-};
-
-export const namePrompt = {
-	message: `生成代码文件名：`,
-	validate: (value: string) => (!value || !value.trim() ? `名称不能为空` : true)
 };
 
 const namePatterns: Record<string, RegExp> = {
@@ -36,7 +31,7 @@ const errorMessages: Record<string, string> = {
 	context: '名称格式不正确，必须是以 "use" 开头，驼峰命名，且以 "Context" 结尾',
 	component: '名称格式不正确，必须是以大写字母开头的驼峰命名格式'
 };
-
+// 文件名称校验
 export const getNamePrompt = (type: string) => ({
 	message: `生成代码文件名：`,
 	default: defaultValues[type],
@@ -53,6 +48,7 @@ export const getNamePrompt = (type: string) => ({
 	}
 });
 
+// 文件路径校验
 export const getCopyPathPrompt = (defaultPath: string) => {
 	return {
 		message: `代码生成在哪个文件下？`,

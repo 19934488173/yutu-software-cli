@@ -13,10 +13,6 @@ var modulePrompt = {
   message: "\u8BF7\u9009\u62E9\u4EE3\u7801\u590D\u7528\u7C7B\u578B",
   choices: TEMPLATE_TYPE
 };
-var namePrompt = {
-  message: `\u751F\u6210\u4EE3\u7801\u6587\u4EF6\u540D\uFF1A`,
-  validate: (value) => !value || !value.trim() ? `\u540D\u79F0\u4E0D\u80FD\u4E3A\u7A7A` : true
-};
 var namePatterns = {
   swr: /^use(-[a-z]+)+$/,
   context: /^use[A-Z][a-zA-Z]*Context$/,
@@ -58,6 +54,5 @@ export {
   TEMPLATE_TYPE,
   getCopyPathPrompt,
   getNamePrompt,
-  modulePrompt,
-  namePrompt
+  modulePrompt
 };

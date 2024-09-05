@@ -8,9 +8,13 @@ import { join } from 'path';
  */
 const readPackageJson = (path: string) => {
 	try {
-		// 去掉结尾的 /dist 运行的是打包后的文件，需要去掉 /dist
-		const newPath = path.replace(/\/dist$/, '');
-		const fullPath = join(newPath, './package.json'); // 构造 package.json 的绝对路径
+		// 去掉结尾的 /dist 或 \dist
+		const newPath = path.replace(/[\/\\]dist$/, '');
+		const fullPath = join(newPath, 'package.json'); // 构造 package.json 的绝对路径
+
+		// 打印调试信息
+		console.log(`Reading package.json from: ${fullPath}`);
+
 		const data = readFileSync(fullPath, 'utf-8'); // 读取文件内容
 		return JSON.parse(data); // 解析并返回 JSON 数据
 	} catch (error) {

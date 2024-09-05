@@ -1,12 +1,7 @@
 import { safeSelectPrompt, input } from '@yutu-software-cli/inquirer-prompts';
 import { catchError } from '@yutu-software-cli/share-utils';
 import { TEMPLATE_LIST } from './dataSource';
-import {
-	namePrompt,
-	modulePrompt,
-	getCopyPathPrompt,
-	getNamePrompt
-} from './promptUtils';
+import { modulePrompt, getCopyPathPrompt, getNamePrompt } from './promptUtils';
 
 /*  获取用户选择的模板信息 */
 const getTemplateInfo = async () => {
