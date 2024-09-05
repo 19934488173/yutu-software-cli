@@ -3,7 +3,7 @@ import axios from "axios";
 import urlJoin from "url-join";
 import semver from "semver";
 function getDefaultRegistry(isOriginal = false) {
-  return isOriginal ? "https://registry.npmjs.org" : "https://registry.npmjs.org";
+  return isOriginal ? "https://registry.npmjs.org" : "https://registry.npmmirror.com";
 }
 async function getNpmInfo(npmName, registry = getDefaultRegistry()) {
   if (!npmName) return null;
