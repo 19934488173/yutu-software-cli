@@ -12,7 +12,7 @@ interface NpmInfo {
 export function getDefaultRegistry(isOriginal: boolean = false): string {
 	return isOriginal
 		? 'https://registry.npmjs.org'
-		: 'https://registry.npmjs.org';
+		: 'https://registry.npmmirror.com';
 }
 
 /** 获取npm包的版本信息 */
