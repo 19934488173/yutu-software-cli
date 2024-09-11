@@ -1,46 +1,37 @@
 // commands/add/src/dataSource.ts
 var TEMPLATE_LIST = [
   {
-    name: "\u699C\u5355table",
-    value: "rank-table",
-    npmName: "yutu-software-template-section",
-    module: "pages",
-    version: "latest",
-    copyPath: "src/pages",
-    sourcePath: "template/pages/list",
-    ignore: ["**/node_modules/**"],
-    type: "page"
-  },
-  {
     name: "context\u6A21\u7248",
     value: "context",
-    npmName: "yutu-software-template-section",
+    npmName: "template-storybook",
     module: "fragment",
     version: "latest",
     copyPath: "src/pages",
-    sourcePath: "template/contexts/paramsContext",
+    /** 组件相关源码路径 */
+    sourceCodePath: ["/src/hooks/useCustomContext.ts"],
+    sourcePath: "src/template/context",
     ignore: [],
     type: "context"
   },
   {
     name: "swr\u672C\u5730\u5B58\u50A8",
     value: "swrStorage",
-    npmName: "yutu-software-template-section",
+    npmName: "template-storybook",
     module: "fragment",
     version: "latest",
     copyPath: "src/pages/data",
-    sourcePath: "template/data/swrStorage",
+    sourcePath: "src/template/data/swrStorage",
     ignore: [""],
     type: "swr"
   },
   {
     name: "swr\u8BF7\u6C42",
     value: "swrRequest",
-    npmName: "yutu-software-template-section",
+    npmName: "template-storybook",
     module: "fragment",
     version: "latest",
     copyPath: "src/pages/data",
-    sourcePath: "template/data/swrRequest",
+    sourcePath: "src/template/data/swrRequest",
     ignore: [""],
     type: "swr"
   },
@@ -56,7 +47,7 @@ var TEMPLATE_LIST = [
       "/src/components/echarts/BaseChart",
       "/src/components/echarts/publicConfig"
     ],
-    sourcePath: "src/pages/baseChart",
+    sourcePath: "src/template/components/baseChart",
     ignore: ["chart-data.ts"],
     type: "component"
   }

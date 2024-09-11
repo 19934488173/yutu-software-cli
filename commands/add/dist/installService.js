@@ -89,7 +89,7 @@ var InstallService = class {
         for (let i = 0; i < this.componentPath.length; i++) {
           const componentPath = this.componentPath[i];
           const componentTargetPath = this.componentTargetPath[i];
-          if (fse.pathExistsSync(componentPath)) {
+          if (!fse.pathExistsSync(componentTargetPath)) {
             fse.copySync(componentPath, componentTargetPath);
           }
         }
