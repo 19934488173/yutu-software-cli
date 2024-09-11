@@ -6,8 +6,13 @@ var catchError = (options) => {
     exitCode = 1,
     logger = console,
     // 默认使用 console 打印日志
-    onErrorHandled
+    onErrorHandled,
+    spinner
   } = options;
+  if (spinner) {
+    spinner.stop(true);
+    process.stdout.write("\x1B[2K\r");
+  }
   if (error) {
     logger.error(`${msg} ${error.message}`);
     logger.error(error.stack);

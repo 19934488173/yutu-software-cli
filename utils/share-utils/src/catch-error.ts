@@ -5,6 +5,7 @@ interface CatchErrorOptions {
 	exitCode?: number;
 	logger?: { error: (msg: string) => void }; // 可选的自定义日志工具
 	onErrorHandled?: () => void; // 可选的错误处理后的回调函数
+	spinner?: any;
 }
 const catchError = (options: CatchErrorOptions) => {
 	const {
@@ -12,8 +13,15 @@ const catchError = (options: CatchErrorOptions) => {
 		error = null,
 		exitCode = 1,
 		logger = console, // 默认使用 console 打印日志
-		onErrorHandled
+		onErrorHandled,
+		spinner
 	} = options;
+
+	if (spinner) {
+		// 清除 spinner 的输出
+		spinner.stop(true);
+		process.stdout.write('\x1B[2K\r'); // 清除当前行
+	}
 
 	// 错误信息处理
 	if (error) {

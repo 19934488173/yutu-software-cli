@@ -68,6 +68,7 @@ const templateInstaller = async (options: IOptions) => {
 			logger.info(templateExists ? '更新模板成功！' : '下载模板成功！');
 		}
 	} catch (error: any) {
+		process.stdout.write('\x1B[2K\r');
 		// 捕获安装或更新过程中的错误并抛出
 		throw new Error(
 			`模板${templateExists ? '更新' : '下载'}失败: ${error.message}`

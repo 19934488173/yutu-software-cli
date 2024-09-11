@@ -10,14 +10,23 @@ import { catchError } from "@yutu-software-cli/share-utils";
 // commands/add/src/dataSource.ts
 var TEMPLATE_LIST = [
   {
+    name: "baseIndex\u6A21\u7248",
+    value: "baseIndex",
+    npmName: "template-storybook",
+    module: "fragment",
+    version: "latest",
+    copyPath: "src/pages",
+    sourcePath: "src/template/pages/base",
+    ignore: [],
+    type: "component"
+  },
+  {
     name: "context\u6A21\u7248",
     value: "context",
     npmName: "template-storybook",
     module: "fragment",
     version: "latest",
     copyPath: "src/pages",
-    /** 组件相关源码路径 */
-    sourceCodePath: ["/src/hooks/useCustomContext.ts"],
     sourcePath: "src/template/context",
     ignore: [],
     type: "context"
@@ -255,9 +264,10 @@ var InstallService = class {
         data: this.templateInfo,
         options: { ignoreFiles, ejsDir: this.targetPath }
       });
-      this.logger.info("\u6A21\u677F\u5B89\u88C5\u6210\u529F");
+      process.stdout.write("\x1B[2K\r");
+      console.log("\u6A21\u677F\u5B89\u88C5\u6210\u529F");
     } catch (error) {
-      catchError2({ msg: "\u6A21\u677F\u5B89\u88C5\u5931\u8D25:", error });
+      catchError2({ msg: "\u6A21\u677F\u5B89\u88C5\u5931\u8D25:", error, spinner });
     } finally {
       spinner.stop(true);
     }

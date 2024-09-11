@@ -1,14 +1,23 @@
 // commands/add/src/dataSource.ts
 var TEMPLATE_LIST = [
   {
+    name: "baseIndex\u6A21\u7248",
+    value: "baseIndex",
+    npmName: "template-storybook",
+    module: "fragment",
+    version: "latest",
+    copyPath: "src/pages",
+    sourcePath: "src/template/pages/base",
+    ignore: [],
+    type: "component"
+  },
+  {
     name: "context\u6A21\u7248",
     value: "context",
     npmName: "template-storybook",
     module: "fragment",
     version: "latest",
     copyPath: "src/pages",
-    /** 组件相关源码路径 */
-    sourceCodePath: ["/src/hooks/useCustomContext.ts"],
     sourcePath: "src/template/context",
     ignore: [],
     type: "context"

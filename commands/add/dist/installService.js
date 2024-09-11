@@ -102,9 +102,10 @@ var InstallService = class {
         data: this.templateInfo,
         options: { ignoreFiles, ejsDir: this.targetPath }
       });
-      this.logger.info("\u6A21\u677F\u5B89\u88C5\u6210\u529F");
+      process.stdout.write("\x1B[2K\r");
+      console.log("\u6A21\u677F\u5B89\u88C5\u6210\u529F");
     } catch (error) {
-      catchError({ msg: "\u6A21\u677F\u5B89\u88C5\u5931\u8D25:", error });
+      catchError({ msg: "\u6A21\u677F\u5B89\u88C5\u5931\u8D25:", error, spinner });
     } finally {
       spinner.stop(true);
     }

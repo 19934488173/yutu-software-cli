@@ -46,6 +46,7 @@ var templateInstaller = async (options) => {
       logger.info(templateExists ? "\u66F4\u65B0\u6A21\u677F\u6210\u529F\uFF01" : "\u4E0B\u8F7D\u6A21\u677F\u6210\u529F\uFF01");
     }
   } catch (error) {
+    process.stdout.write("\x1B[2K\r");
     throw new Error(
       `\u6A21\u677F${templateExists ? "\u66F4\u65B0" : "\u4E0B\u8F7D"}\u5931\u8D25: ${error.message}`
     );

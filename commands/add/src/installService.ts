@@ -72,7 +72,6 @@ class InstallService {
 		);
 		const storeDir = path.resolve(targetPath, 'node_modules');
 		const { npmName: packageName, version: packageVersion } = this.templateInfo;
-
 		try {
 			this.templateNpmInfo = await templateInstaller({
 				packageName,
@@ -103,9 +102,11 @@ class InstallService {
 				}
 			}
 
+			// 如果目标路径不存在，则创建
 			// 确保模板源路径和目标路径存在
 			fse.ensureDirSync(this.templatePath);
 			fse.ensureDirSync(this.targetPath);
+
 			// 复制模板到目标目录
 			fse.copySync(this.templatePath, this.targetPath);
 			//ejs渲染
@@ -114,10 +115,10 @@ class InstallService {
 				data: this.templateInfo,
 				options: { ignoreFiles, ejsDir: this.targetPath }
 			});
-
-			this.logger.info('模板安装成功');
+			process.stdout.write('\x1B[2K\r'); // 清空控制台
+			console.log('模板安装成功');
 		} catch (error) {
-			catchError({ msg: '模板安装失败:', error });
+			catchError({ msg: '模板安装失败:', error, spinner });
 		} finally {
 			spinner.stop(true);
 		}
