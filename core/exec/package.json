@@ -1,6 +1,6 @@
 {
 	"name": "@yutu-software-cli/exec",
-	"version": "1.6.11",
+	"version": "1.6.13",
 	"description": "@yutu/cli exec",
 	"author": "amberHe <1542588809@qq.com>",
 	"homepage": "https://github.com/19934488173/yutu-software-cli#readme",
@@ -8,8 +8,8 @@
 	"main": "dist/index.js",
 	"dependencies": {
 		"@yutu-software-cli/debug-log": "^1.6.5",
-		"@yutu-software-cli/package-handler": "^1.6.11",
-		"@yutu-software-cli/share-utils": "^1.6.10",
+		"@yutu-software-cli/package-handler": "^1.6.13",
+		"@yutu-software-cli/share-utils": "^1.6.13",
 		"commander": "^12.1.0"
 	},
 	"directories": {
